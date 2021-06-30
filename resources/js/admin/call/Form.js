@@ -2,16 +2,17 @@ import AppForm from '../app-components/Form/AppForm';
 
 Vue.component('call-form', {
     mixins: [AppForm],
-    data: function() {
+    props: ['call_type', 'cargo', 'institucion'],
+    data: function () {
         return {
             form: {
-                description:  '' ,
-                call_type_id:  '' ,
-                position_id:  '' ,
-                company_id:  '' ,
-                start:  '' ,
-                end:  '' ,
-                
+                description: '',
+                call_type: '',
+                position: '',
+                company: '',
+                start: '',
+                end: '',
+
             }
         }
     }

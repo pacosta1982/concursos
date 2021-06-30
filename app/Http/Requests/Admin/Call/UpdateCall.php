@@ -32,7 +32,7 @@ class UpdateCall extends FormRequest
             'company_id' => ['sometimes', 'integer'],
             'start' => ['sometimes', 'date'],
             'end' => ['sometimes', 'date'],
-            
+
         ];
     }
 
@@ -49,5 +49,29 @@ class UpdateCall extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getCallTypeId()
+    {
+        if ($this->has('call_type')) {
+            return $this->get('call_type')['id'];
+        }
+        return null;
+    }
+
+    public function getPositionId()
+    {
+        if ($this->has('position')) {
+            return $this->get('position')['id'];
+        }
+        return null;
+    }
+
+    public function getCompanyId()
+    {
+        if ($this->has('company')) {
+            return $this->get('company')['id'];
+        }
+        return null;
     }
 }

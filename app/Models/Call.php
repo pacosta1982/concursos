@@ -13,24 +13,40 @@ class Call extends Model
         'company_id',
         'start',
         'end',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'start',
         'end',
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
+    protected $with = ['CallType', 'Position', 'Company'];
 
     /* ************************ ACCESSOR ************************* */
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/calls/'.$this->getKey());
+        return url('/admin/calls/' . $this->getKey());
+    }
+
+    public function CallType()
+    {
+        return $this->belongsTo('App\Models\CallType');
+    }
+
+    public function Position()
+    {
+        return $this->belongsTo('App\Models\Position');
+    }
+
+    public function Company()
+    {
+        return $this->belongsTo('App\Models\Company');
     }
 }

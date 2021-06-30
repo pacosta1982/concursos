@@ -27,20 +27,20 @@ class StoreCall extends FormRequest
     {
         return [
             'description' => ['required', 'string'],
-            'call_type_id' => ['required', 'integer'],
-            'position_id' => ['required', 'integer'],
-            'company_id' => ['required', 'integer'],
+            'call_type' => ['required'],
+            'position' => ['required'],
+            'company' => ['required'],
             'start' => ['required', 'date'],
             'end' => ['required', 'date'],
-            
+
         ];
     }
 
     /**
-    * Modify input data
-    *
-    * @return array
-    */
+     * Modify input data
+     *
+     * @return array
+     */
     public function getSanitized(): array
     {
         $sanitized = $this->validated();
@@ -48,5 +48,29 @@ class StoreCall extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getCallTypeId()
+    {
+        if ($this->has('call_type')) {
+            return $this->get('call_type')['id'];
+        }
+        return null;
+    }
+
+    public function getPositionId()
+    {
+        if ($this->has('position')) {
+            return $this->get('position')['id'];
+        }
+        return null;
+    }
+
+    public function getCompanyId()
+    {
+        if ($this->has('company')) {
+            return $this->get('company')['id'];
+        }
+        return null;
     }
 }

@@ -74,20 +74,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
-        Route::prefix('companies')->name('companies/')->group(static function () {
-            Route::get('/',                                             'CompaniesController@index')->name('index');
-            Route::get('/create',                                       'CompaniesController@create')->name('create');
-            Route::post('/',                                            'CompaniesController@store')->name('store');
-            Route::get('/{company}/edit',                               'CompaniesController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'CompaniesController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{company}',                                   'CompaniesController@update')->name('update');
-            Route::delete('/{company}',                                 'CompaniesController@destroy')->name('destroy');
-        });
-    });
-});
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
@@ -119,20 +105,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
-        Route::prefix('call-types')->name('call-types/')->group(static function () {
-            Route::get('/',                                             'CallTypesController@index')->name('index');
-            Route::get('/create',                                       'CallTypesController@create')->name('create');
-            Route::post('/',                                            'CallTypesController@store')->name('store');
-            Route::get('/{callType}/edit',                              'CallTypesController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'CallTypesController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{callType}',                                  'CallTypesController@update')->name('update');
-            Route::delete('/{callType}',                                'CallTypesController@destroy')->name('destroy');
-        });
-    });
-});
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
@@ -160,6 +132,53 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'CallsController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{call}',                                      'CallsController@update')->name('update');
             Route::delete('/{call}',                                    'CallsController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('languages')->name('languages/')->group(static function () {
+            Route::get('/',                                             'LanguagesController@index')->name('index');
+            Route::get('/create',                                       'LanguagesController@create')->name('create');
+            Route::post('/',                                            'LanguagesController@store')->name('store');
+            Route::get('/{language}/edit',                              'LanguagesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'LanguagesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{language}',                                  'LanguagesController@update')->name('update');
+            Route::delete('/{language}',                                'LanguagesController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('companies')->name('companies/')->group(static function () {
+            Route::get('/',                                             'CompaniesController@index')->name('index');
+            Route::get('/create',                                       'CompaniesController@create')->name('create');
+            Route::post('/',                                            'CompaniesController@store')->name('store');
+            Route::get('/{company}/edit',                               'CompaniesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CompaniesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{company}',                                   'CompaniesController@update')->name('update');
+            Route::delete('/{company}',                                 'CompaniesController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('call-types')->name('call-types/')->group(static function () {
+            Route::get('/',                                             'CallTypesController@index')->name('index');
+            Route::get('/create',                                       'CallTypesController@create')->name('create');
+            Route::post('/',                                            'CallTypesController@store')->name('store');
+            Route::get('/{callType}/edit',                              'CallTypesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CallTypesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{callType}',                                  'CallTypesController@update')->name('update');
+            Route::delete('/{callType}',                                'CallTypesController@destroy')->name('destroy');
         });
     });
 });

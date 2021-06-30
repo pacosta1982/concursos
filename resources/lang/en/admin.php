@@ -181,5 +181,55 @@ return [
         ],
     ],
 
+    'language' => [
+        'title' => 'Languages',
+
+        'actions' => [
+            'index' => 'Languages',
+            'create' => 'New Language',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'acronym' => 'Acronym',
+            
+        ],
+    ],
+
+    'company' => [
+        'title' => 'Companies',
+
+        'actions' => [
+            'index' => 'Companies',
+            'create' => 'New Company',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'acronym' => 'Acronym',
+            
+        ],
+    ],
+
+    'call-type' => [
+        'title' => 'Call Types',
+
+        'actions' => [
+            'index' => 'Call Types',
+            'create' => 'New Call Type',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

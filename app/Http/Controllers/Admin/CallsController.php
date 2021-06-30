@@ -9,6 +9,9 @@ use App\Http\Requests\Admin\Call\IndexCall;
 use App\Http\Requests\Admin\Call\StoreCall;
 use App\Http\Requests\Admin\Call\UpdateCall;
 use App\Models\Call;
+use App\Models\CallType;
+use App\Models\Position;
+use App\Models\Company;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -51,7 +54,8 @@ class CallsController extends Controller
             }
             return ['data' => $data];
         }
-
+        //dd($data);
+        //return $data;
         return view('admin.call.index', ['data' => $data]);
     }
 
@@ -64,8 +68,11 @@ class CallsController extends Controller
     public function create()
     {
         $this->authorize('admin.call.create');
+        $tipo_llamado = CallType::all();
+        $cargo = Position::all();
+        $institucion = Company::all();
 
-        return view('admin.call.create');
+        return view('admin.call.create', compact('tipo_llamado', 'cargo', 'institucion'));
     }
 
     /**
@@ -77,7 +84,12 @@ class CallsController extends Controller
     public function store(StoreCall $request)
     {
         // Sanitize input
+        //dd($request);
         $sanitized = $request->getSanitized();
+
+        $sanitized['call_type_id'] = $request->getCallTypeId();
+        $sanitized['position_id'] = $request->getPositionId();
+        $sanitized['company_id'] = $request->getCompanyId();
 
         // Store the Call
         $call = Call::create($sanitized);
@@ -113,10 +125,15 @@ class CallsController extends Controller
     public function edit(Call $call)
     {
         $this->authorize('admin.call.edit', $call);
-
+        $tipo_llamado = CallType::all();
+        $cargo = Position::all();
+        $institucion = Company::all();
 
         return view('admin.call.edit', [
             'call' => $call,
+            'tipo_llamado' => $tipo_llamado,
+            'cargo' => $cargo,
+            'institucion' => $institucion,
         ]);
     }
 
@@ -131,7 +148,9 @@ class CallsController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-
+        $sanitized['call_type_id'] = $request->getCallTypeId();
+        $sanitized['position_id'] = $request->getPositionId();
+        $sanitized['company_id'] = $request->getCompanyId();
         // Update changed values Call
         $call->update($sanitized);
 
@@ -171,7 +190,7 @@ class CallsController extends Controller
      * @throws Exception
      * @return Response|bool
      */
-    public function bulkDestroy(BulkDestroyCall $request) : Response
+    public function bulkDestroy(BulkDestroyCall $request): Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])
