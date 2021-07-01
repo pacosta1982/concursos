@@ -10,6 +10,9 @@
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/call-types') }}"><i class="nav-icon icon-diamond"></i> {{ trans('admin.call-type.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/positions') }}"><i class="nav-icon icon-book-open"></i> {{ trans('admin.position.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/calls') }}"><i class="nav-icon icon-plane"></i> {{ trans('admin.call.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/disengagement-reasons') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.disengagement-reason.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/language-levels') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.language-level.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/ethnic-groups') }}"><i class="nav-icon icon-graduation"></i> {{ trans('admin.ethnic-group.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>

@@ -13,7 +13,7 @@ class Call extends Model
         'company_id',
         'start',
         'end',
-
+        'footnote',
     ];
 
 

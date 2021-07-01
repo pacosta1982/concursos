@@ -231,5 +231,101 @@ return [
         ],
     ],
 
+    'contact-method' => [
+        'title' => 'Contact Methods',
+
+        'actions' => [
+            'index' => 'Contact Methods',
+            'create' => 'New Contact Method',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'disability' => [
+        'title' => 'Disabilities',
+
+        'actions' => [
+            'index' => 'Disabilities',
+            'create' => 'New Disability',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'education-level' => [
+        'title' => 'Education Levels',
+
+        'actions' => [
+            'index' => 'Education Levels',
+            'create' => 'New Education Level',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'disengagement-reason' => [
+        'title' => 'Disengagement Reasons',
+
+        'actions' => [
+            'index' => 'Disengagement Reasons',
+            'create' => 'New Disengagement Reason',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'language-level' => [
+        'title' => 'Language Levels',
+
+        'actions' => [
+            'index' => 'Language Levels',
+            'create' => 'New Language Level',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'ethnic-group' => [
+        'title' => 'Ethnic Groups',
+
+        'actions' => [
+            'index' => 'Ethnic Groups',
+            'create' => 'New Ethnic Group',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

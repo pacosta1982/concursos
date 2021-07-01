@@ -32,6 +32,7 @@ class UpdateCall extends FormRequest
             'company_id' => ['sometimes', 'integer'],
             'start' => ['sometimes', 'date'],
             'end' => ['sometimes', 'date'],
+            'footnote' => ['required'],
 
         ];
     }

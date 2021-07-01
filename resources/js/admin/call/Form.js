@@ -12,6 +12,7 @@ Vue.component('call-form', {
                 company: '',
                 start: '',
                 end: '',
+                footnote: '',
 
             }
         }
