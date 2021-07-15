@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 
@@ -113,6 +113,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::get('/',                                             'PositionController@index')->name('index');
             Route::get('/create',                                       'PositionController@create')->name('create');
             Route::post('/',                                            'PositionController@store')->name('store');
+            Route::get('/{position}/show',                              'PositionController@show')->name('show');
             Route::get('/{position}/edit',                              'PositionController@edit')->name('edit');
             Route::post('/bulk-destroy',                                'PositionController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{position}',                                  'PositionController@update')->name('update');
@@ -186,8 +187,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('contact-methods')->name('contact-methods/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('contact-methods')->name('contact-methods/')->group(static function () {
             Route::get('/',                                             'ContactMethodsController@index')->name('index');
             Route::get('/create',                                       'ContactMethodsController@create')->name('create');
             Route::post('/',                                            'ContactMethodsController@store')->name('store');
@@ -201,8 +202,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('disabilities')->name('disabilities/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('disabilities')->name('disabilities/')->group(static function () {
             Route::get('/',                                             'DisabilitiesController@index')->name('index');
             Route::get('/create',                                       'DisabilitiesController@create')->name('create');
             Route::post('/',                                            'DisabilitiesController@store')->name('store');
@@ -216,8 +217,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('education-levels')->name('education-levels/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('education-levels')->name('education-levels/')->group(static function () {
             Route::get('/',                                             'EducationLevelsController@index')->name('index');
             Route::get('/create',                                       'EducationLevelsController@create')->name('create');
             Route::post('/',                                            'EducationLevelsController@store')->name('store');
@@ -231,8 +232,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('disengagement-reasons')->name('disengagement-reasons/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('disengagement-reasons')->name('disengagement-reasons/')->group(static function () {
             Route::get('/',                                             'DisengagementReasonsController@index')->name('index');
             Route::get('/create',                                       'DisengagementReasonsController@create')->name('create');
             Route::post('/',                                            'DisengagementReasonsController@store')->name('store');
@@ -246,8 +247,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('language-levels')->name('language-levels/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('language-levels')->name('language-levels/')->group(static function () {
             Route::get('/',                                             'LanguageLevelsController@index')->name('index');
             Route::get('/create',                                       'LanguageLevelsController@create')->name('create');
             Route::post('/',                                            'LanguageLevelsController@store')->name('store');
@@ -261,8 +262,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('ethnic-groups')->name('ethnic-groups/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('ethnic-groups')->name('ethnic-groups/')->group(static function () {
             Route::get('/',                                             'EthnicGroupsController@index')->name('index');
             Route::get('/create',                                       'EthnicGroupsController@create')->name('create');
             Route::post('/',                                            'EthnicGroupsController@store')->name('store');
@@ -270,6 +271,76 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'EthnicGroupsController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{ethnicGroup}',                               'EthnicGroupsController@update')->name('update');
             Route::delete('/{ethnicGroup}',                             'EthnicGroupsController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('requirement-types')->name('requirement-types/')->group(static function () {
+            Route::get('/',                                             'RequirementTypesController@index')->name('index');
+            Route::get('/create',                                       'RequirementTypesController@create')->name('create');
+            Route::post('/',                                            'RequirementTypesController@store')->name('store');
+            Route::get('/{requirementType}/edit',                       'RequirementTypesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'RequirementTypesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{requirementType}',                           'RequirementTypesController@update')->name('update');
+            Route::delete('/{requirementType}',                         'RequirementTypesController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('requirements')->name('requirements/')->group(static function () {
+            Route::get('/',                                             'RequirementsController@index')->name('index');
+            Route::get('/create',                                       'RequirementsController@create')->name('create');
+            Route::post('/',                                            'RequirementsController@store')->name('store');
+            Route::get('/{requirement}/edit',                           'RequirementsController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'RequirementsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{requirement}',                               'RequirementsController@update')->name('update');
+            Route::delete('/{requirement}',                             'RequirementsController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+//Rutas Postulantes
+Auth::routes();
+
+Route::get('auth/google', 'App\Http\Controllers\Applicant\LoginController@redirectToGoogle')->name('auth.google');
+Route::get('auth/google/callback', 'App\Http\Controllers\Applicant\LoginController@handleGoogleCallback');
+
+Route::get('/home', 'App\Http\Controllers\Applicant\HomeController@index');
+//Resume
+Route::get('/resume', 'App\Http\Controllers\Admin\ResumesController@index');
+Route::get('/resume/create', 'App\Http\Controllers\Admin\ResumesController@create');
+
+//Call
+Route::get('/calls', 'App\Http\Controllers\Applicant\HomeController@homeCalls');
+//Applications
+Route::get(
+    '/applications',
+    function () {
+        return view('applicant.applications.index');
+    }
+);
+//Reports
+Route::get('/reports', function () {
+    return view('applicant.reports.index');
+});
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('resumes')->name('resumes/')->group(static function () {
+            Route::get('/',                                             'ResumesController@index')->name('index');
+            Route::get('/create',                                       'ResumesController@create')->name('create');
+            Route::post('/',                                            'ResumesController@store')->name('store');
+            Route::get('/{resume}/edit',                                'ResumesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ResumesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{resume}',                                    'ResumesController@update')->name('update');
+            Route::delete('/{resume}',                                  'ResumesController@destroy')->name('destroy');
         });
     });
 });

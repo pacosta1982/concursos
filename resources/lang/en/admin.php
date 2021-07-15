@@ -327,5 +327,65 @@ return [
         ],
     ],
 
+    'requirement-type' => [
+        'title' => 'Requirement Types',
+
+        'actions' => [
+            'index' => 'Requirement Types',
+            'create' => 'New Requirement Type',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'requirement' => [
+        'title' => 'Requirements',
+
+        'actions' => [
+            'index' => 'Requirements',
+            'create' => 'New Requirement',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'position_id' => 'Position',
+            'requirement_type_id' => 'Requirement type',
+            'education_level_id' => 'Education level',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'resume' => [
+        'title' => 'Resumes',
+
+        'actions' => [
+            'index' => 'Resumes',
+            'create' => 'New Resume',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'names' => 'Names',
+            'last_names' => 'Last names',
+            'government_id' => 'Government',
+            'birthdate' => 'Birthdate',
+            'gender' => 'Gender',
+            'nationality' => 'Nationality',
+            'address' => 'Address',
+            'neighborhood' => 'Neighborhood',
+            'phone' => 'Phone',
+            'email' => 'Email',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

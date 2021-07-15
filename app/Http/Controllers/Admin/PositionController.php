@@ -8,7 +8,11 @@ use App\Http\Requests\Admin\Position\DestroyPosition;
 use App\Http\Requests\Admin\Position\IndexPosition;
 use App\Http\Requests\Admin\Position\StorePosition;
 use App\Http\Requests\Admin\Position\UpdatePosition;
+use App\Http\Requests\Admin\Requirement\IndexRequirement;
 use App\Models\Position;
+use App\Models\Requirement;
+use App\Models\RequirementType;
+use App\Models\EducationLevel;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -96,10 +100,50 @@ class PositionController extends Controller
      * @throws AuthorizationException
      * @return void
      */
-    public function show(Position $position)
+    public function show(Position $position, IndexRequirement $request)
     {
         $this->authorize('admin.position.show', $position);
 
+        $positioID = $position->id;
+
+        $data = AdminListing::create(Requirement::class)->processRequestAndGet(
+            // pass the request with params
+            $request,
+
+            // set columns to query
+            ['id', 'position_id', 'requirement_type_id', 'education_level_id', 'name'],
+
+            // set columns to searchIn
+            ['id', 'name'],
+            function ($query) use ($positioID) {
+                $query
+                    //->leftJoin('document_types', 'document_types.id', '=', 'applicant_documents.document_id')
+                    ->where('requirements.position_id', '=', $positioID)
+                    ->orderBy('requirements.requirement_type_id');
+                //->where('document_types.type', '=', $documentType);
+            }
+        );
+
+        //return $data;
+
+        if ($request->ajax()) {
+            if ($request->has('bulk')) {
+                return [
+                    'bulkItems' => $data->pluck('id')
+                ];
+            }
+            return ['data' => $data];
+        }
+
+        $requirement = RequirementType::all();
+        $education_level = EducationLevel::all();
+
+        return view('admin.position.show', [
+            'position' => $position,
+            'data' => $data,
+            'requirement' => $requirement,
+            'education_level' => $education_level,
+        ]);
         // TODO your code goes here
     }
 
@@ -171,7 +215,7 @@ class PositionController extends Controller
      * @throws Exception
      * @return Response|bool
      */
-    public function bulkDestroy(BulkDestroyPosition $request) : Response
+    public function bulkDestroy(BulkDestroyPosition $request): Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])

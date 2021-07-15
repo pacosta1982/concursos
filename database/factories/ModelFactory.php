@@ -142,3 +142,45 @@ $factory->define(App\Models\EthnicGroup::class, static function (Faker\Generator
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\RequirementType::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Requirement::class, static function (Faker\Generator $faker) {
+    return [
+        'position_id' => $faker->randomNumber(5),
+        'requirement_type_id' => $faker->randomNumber(5),
+        'education_level_id' => $faker->randomNumber(5),
+        'name' => $faker->firstName,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Resume::class, static function (Faker\Generator $faker) {
+    return [
+        'names' => $faker->sentence,
+        'last_names' => $faker->sentence,
+        'government_id' => $faker->sentence,
+        'birthdate' => $faker->date(),
+        'gender' => $faker->sentence,
+        'nationality' => $faker->sentence,
+        'address' => $faker->sentence,
+        'neighborhood' => $faker->sentence,
+        'phone' => $faker->sentence,
+        'email' => $faker->email,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

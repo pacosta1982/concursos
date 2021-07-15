@@ -12,3 +12,6 @@ import './education-level';
 import './disengagement-reason';
 import './language-level';
 import './ethnic-group';
+import './requirement-type';
+import './requirement';
+import './resume';

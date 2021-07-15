@@ -13,6 +13,9 @@
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/disengagement-reasons') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.disengagement-reason.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/language-levels') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.language-level.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/ethnic-groups') }}"><i class="nav-icon icon-graduation"></i> {{ trans('admin.ethnic-group.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/requirement-types') }}"><i class="nav-icon icon-drop"></i> {{ trans('admin.requirement-type.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/requirements') }}"><i class="nav-icon icon-energy"></i> {{ trans('admin.requirement.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/resumes') }}"><i class="nav-icon icon-plane"></i> {{ trans('admin.resume.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>
