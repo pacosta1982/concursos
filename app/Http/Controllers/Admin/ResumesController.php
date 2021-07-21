@@ -8,9 +8,14 @@ use App\Http\Requests\Admin\Resume\DestroyResume;
 use App\Http\Requests\Admin\Resume\IndexResume;
 use App\Http\Requests\Admin\Resume\StoreResume;
 use App\Http\Requests\Admin\Resume\UpdateResume;
+use App\Http\Requests\Admin\AcademicTraining\DestroyAcademicTraining;
+use App\Http\Requests\Admin\AcademicTraining\IndexAcademicTraining;
 use App\Models\Resume;
+use App\Models\AcademicTraining;
+use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
@@ -29,18 +34,17 @@ class ResumesController extends Controller
      * @param IndexResume $request
      * @return array|Factory|View
      */
-    public function index()
+    public function index(IndexAcademicTraining $request)
     {
-        // create and AdminListing instance for a specific model and
-        /*$data = AdminListing::create(Resume::class)->processRequestAndGet(
+        $data = AdminListing::create(AcademicTraining::class)->processRequestAndGet(
             // pass the request with params
             $request,
 
             // set columns to query
-            ['id', 'names', 'last_names', 'government_id', 'birthdate', 'gender', 'nationality', 'address', 'neighborhood', 'phone', 'email'],
+            ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered'],
 
             // set columns to searchIn
-            ['id', 'names', 'last_names', 'government_id', 'gender', 'nationality', 'address', 'neighborhood', 'phone', 'email']
+            ['id', 'name', 'institution']
         );
 
         if ($request->ajax()) {
@@ -50,10 +54,10 @@ class ResumesController extends Controller
                 ];
             }
             return ['data' => $data];
-        }*/
-        $resume = '';
+        }
+        $resume = Resume::where('created_by', Auth::user()->id)->first();
 
-        return view('applicant.resume.index', compact('resume'));
+        return view('applicant.resume.index', compact('resume', 'data'));
     }
 
     /**
@@ -67,6 +71,66 @@ class ResumesController extends Controller
         //$this->authorize('admin.resume.create');
 
         return view('applicant.resume.create');
+    }
+
+    public function getIdentificaciones($id)
+    {
+        //return "abc";
+        $client = new Client();
+
+        try {
+            $url = "http://" . env("URL_ENV", "192.168.202.43:8080") . "/mbohape-core/sii/security";
+            $res = $client->request('POST', $url, [
+                'connect_timeout' => 10,
+                'http_errors' => true,
+                'headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json'],
+                'json' => [
+                    'username' => 'senavitatconsultas',
+                    'password' => 'S3n4vitat'
+                ],
+            ]);
+            //return $res;
+            //dd($res);
+            if ($res->getStatusCode() == 200) {
+                $json = json_decode($res->getBody(), true);
+                $token = $json['token'];
+
+                $url = "http://" . env("URL_ENV", "192.168.202.43:8080") . '/frontend-identificaciones/api/persona/obtenerPersonaPorCedula/' . $id;
+                $res = $client->request('GET', $url, [
+                    'connect_timeout' => 10,
+                    'http_errors' => true,
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer ' . $token,
+                    ],
+                ]);
+
+                if ($res->getStatusCode() == 200) {
+                    $json = json_decode($res->getBody(), true);
+                    return response()->json([
+                        'error' => false,
+                        'message' => $json['obtenerPersonaPorNroCedulaResponse']['return']
+                    ]);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Error de comunicación en Consulta'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Error de Autenticación'
+                ]);
+            }
+        } catch (\Exception $exception) {
+            //dd($exception);
+            return response()->json([
+                'error' => true,
+                'message' => 'Error de comunicación'
+            ]);
+        }
     }
 
     /**
@@ -84,10 +148,10 @@ class ResumesController extends Controller
         $resume = Resume::create($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/resumes'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('resume'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/resumes');
+        return redirect('resume');
     }
 
     /**
@@ -113,10 +177,10 @@ class ResumesController extends Controller
      */
     public function edit(Resume $resume)
     {
-        $this->authorize('admin.resume.edit', $resume);
+        //$this->authorize('admin.resume.edit', $resume);
+        //dd($resume);
 
-
-        return view('admin.resume.edit', [
+        return view('applicant.resume.edit', [
             'resume' => $resume,
         ]);
     }
@@ -138,12 +202,12 @@ class ResumesController extends Controller
 
         if ($request->ajax()) {
             return [
-                'redirect' => url('admin/resumes'),
+                'redirect' => url('resume'),
                 'message' => trans('brackets/admin-ui::admin.operation.succeeded'),
             ];
         }
 
-        return redirect('admin/resumes');
+        return redirect('resume');
     }
 
     /**

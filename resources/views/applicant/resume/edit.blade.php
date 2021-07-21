@@ -9,7 +9,8 @@
                 <div class="card">
 
         <resume-form
-            :action="'{{ url('resume') }}'"
+            :action="'{{ url('resume/'.$resume->id.'/update') }}'"
+            :data="{{ $resume->toJson() }}"
             :finddataurl = "'{{ url('resume') }}'"
             v-cloak
             inline-template>

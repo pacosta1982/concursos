@@ -4,24 +4,26 @@
 
 @section('body')
 
-<div class="container-xl">
+    <div class="container-xl">
 
                 <div class="card">
 
-        <resume-form
-            :action="'{{ url('resume') }}'"
-            :finddataurl = "'{{ url('resume') }}'"
+        <academic-training-form
+            :action="'{{ url('admin/academic-trainings') }}'"
+            :education="{{ $education_level->toJson() }}"
+            :academic="{{ $academic_state->toJson() }}"
+            :resume="{{ $resume->id }}"
             v-cloak
             inline-template>
 
             <form class="form-horizontal form-create" method="post" @submit.prevent="onSubmit" :action="action" novalidate>
 
                 <div class="card-header">
-                    <i class="fa fa-plus"></i> {{ trans('admin.resume.actions.create') }}
+                    <i class="fa fa-plus"></i> {{ trans('admin.academic-training.actions.create') }}
                 </div>
 
                 <div class="card-body">
-                    @include('admin.resume.components.form-elements')
+                    @include('admin.academic-training.components.form-elements')
                 </div>
 
                 <div class="card-footer">
@@ -33,10 +35,11 @@
 
             </form>
 
-        </resume-form>
+        </academic-training-form>
 
         </div>
 
         </div>
+
 
 @endsection

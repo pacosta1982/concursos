@@ -4,37 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Resume extends Model
+class AcademicState extends Model
 {
     protected $fillable = [
-        'names',
-        'last_names',
-        'government_id',
-        'birthdate',
-        'gender',
-        'nationality',
-        'address',
-        'neighborhood',
-        'phone',
-        'email',
-        'creatd_by'
-
+        'name',
+    
     ];
-
-
+    
+    
     protected $dates = [
-        'birthdate',
         'created_at',
         'updated_at',
-
+    
     ];
-
+    
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/resumes/' . $this->getKey());
+        return url('/admin/academic-states/'.$this->getKey());
     }
 }

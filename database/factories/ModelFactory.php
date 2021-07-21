@@ -184,3 +184,28 @@ $factory->define(App\Models\Resume::class, static function (Faker\Generator $fak
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\AcademicState::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\AcademicTraining::class, static function (Faker\Generator $faker) {
+    return [
+        'resume_id' => $faker->randomNumber(5),
+        'education_level_id' => $faker->randomNumber(5),
+        'academic_state_id' => $faker->randomNumber(5),
+        'name' => $faker->firstName,
+        'institution' => $faker->sentence,
+        'registered' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

@@ -13,10 +13,10 @@ class UpdateResume extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.resume.edit', $this->resume);
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the request.
@@ -36,7 +36,7 @@ class UpdateResume extends FormRequest
             'neighborhood' => ['sometimes', 'string'],
             'phone' => ['sometimes', 'string'],
             'email' => ['sometimes', 'email', 'string'],
-            
+
         ];
     }
 

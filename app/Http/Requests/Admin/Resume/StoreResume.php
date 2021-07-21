@@ -13,10 +13,10 @@ class StoreResume extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.resume.create');
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the request.
@@ -36,15 +36,15 @@ class StoreResume extends FormRequest
             'neighborhood' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email', 'string'],
-            
+
         ];
     }
 
     /**
-    * Modify input data
-    *
-    * @return array
-    */
+     * Modify input data
+     *
+     * @return array
+     */
     public function getSanitized(): array
     {
         $sanitized = $this->validated();

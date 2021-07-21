@@ -65,11 +65,11 @@
                                 </div>
 
 
-                                <!--<div class="form-group">
+                                <div class="form-group">
                                     <a href="{{ url('/redirectfb') }}" class="btn btn-facebook btn-block"><i class="fa fa-facebook"></i>
                                        <strong>Iniciar con Facebook</strong>
                                     </a>
-                                </div> -->
+                                </div>
 
                                 <!--<div >
                                 <a href="{{url('/redirectfb')}}" >Login with Facebook</a>

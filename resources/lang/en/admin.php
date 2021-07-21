@@ -387,5 +387,42 @@ return [
         ],
     ],
 
+    'academic-state' => [
+        'title' => 'Academic States',
+
+        'actions' => [
+            'index' => 'Academic States',
+            'create' => 'New Academic State',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'academic-training' => [
+        'title' => 'Academic Training',
+
+        'actions' => [
+            'index' => 'Academic Training',
+            'create' => 'New Academic Training',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'resume_id' => 'Resume',
+            'education_level_id' => 'Education level',
+            'academic_state_id' => 'Academic state',
+            'name' => 'Name',
+            'institution' => 'Institution',
+            'registered' => 'Registered',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

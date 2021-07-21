@@ -316,6 +316,15 @@ Route::get('/home', 'App\Http\Controllers\Applicant\HomeController@index');
 //Resume
 Route::get('/resume', 'App\Http\Controllers\Admin\ResumesController@index');
 Route::get('/resume/create', 'App\Http\Controllers\Admin\ResumesController@create');
+Route::get('/resume/{resume}/edit', 'App\Http\Controllers\Admin\ResumesController@edit');
+Route::post('/resume/{resume}/update', 'App\Http\Controllers\Admin\ResumesController@update')->name('update');
+
+//Resume Academic Training
+Route::get('/resume/{resume}/academic-training/create', 'App\Http\Controllers\Admin\AcademicTrainingController@create');
+
+
+Route::get('/resume/{id}/identificaciones', 'App\Http\Controllers\Admin\ResumesController@getIdentificaciones')->name('identificaciones');
+Route::post('/resume', 'App\Http\Controllers\Admin\ResumesController@store')->name('store');
 
 //Call
 Route::get('/calls', 'App\Http\Controllers\Applicant\HomeController@homeCalls');
@@ -340,7 +349,39 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::get('/{resume}/edit',                                'ResumesController@edit')->name('edit');
             Route::post('/bulk-destroy',                                'ResumesController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{resume}',                                    'ResumesController@update')->name('update');
+            Route::get('/{id}/hadbenefit',                              'ResumesController@hadBenefit')->name('hadbenefit');
             Route::delete('/{resume}',                                  'ResumesController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('academic-states')->name('academic-states/')->group(static function () {
+            Route::get('/',                                             'AcademicStatesController@index')->name('index');
+            Route::get('/create',                                       'AcademicStatesController@create')->name('create');
+            Route::post('/',                                            'AcademicStatesController@store')->name('store');
+            Route::get('/{academicState}/edit',                         'AcademicStatesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'AcademicStatesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{academicState}',                             'AcademicStatesController@update')->name('update');
+            Route::delete('/{academicState}',                           'AcademicStatesController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('academic-trainings')->name('academic-trainings/')->group(static function () {
+            Route::get('/',                                             'AcademicTrainingController@index')->name('index');
+            Route::get('/create',                                       'AcademicTrainingController@create')->name('create');
+            Route::post('/',                                            'AcademicTrainingController@store')->name('store');
+            Route::get('/{academicTraining}/edit',                      'AcademicTrainingController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'AcademicTrainingController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{academicTraining}',                          'AcademicTrainingController@update')->name('update');
+            Route::delete('/{academicTraining}',                        'AcademicTrainingController@destroy')->name('destroy');
         });
     });
 });

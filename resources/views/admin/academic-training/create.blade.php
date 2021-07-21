@@ -1,42 +1,42 @@
-@extends('brackets/admin-ui::admin.layout.usersys')
+@extends('brackets/admin-ui::admin.layout.default')
 
-@section('title', trans('admin.applicant.actions.trakings'))
+@section('title', trans('admin.academic-training.actions.create'))
 
 @section('body')
 
-<div class="container-xl">
+    <div class="container-xl">
 
                 <div class="card">
-
-        <resume-form
-            :action="'{{ url('resume') }}'"
-            :finddataurl = "'{{ url('resume') }}'"
+        
+        <academic-training-form
+            :action="'{{ url('admin/academic-trainings') }}'"
             v-cloak
             inline-template>
 
             <form class="form-horizontal form-create" method="post" @submit.prevent="onSubmit" :action="action" novalidate>
-
+                
                 <div class="card-header">
-                    <i class="fa fa-plus"></i> {{ trans('admin.resume.actions.create') }}
+                    <i class="fa fa-plus"></i> {{ trans('admin.academic-training.actions.create') }}
                 </div>
 
                 <div class="card-body">
-                    @include('admin.resume.components.form-elements')
+                    @include('admin.academic-training.components.form-elements')
                 </div>
-
+                                
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary" :disabled="submiting">
                         <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
                         {{ trans('brackets/admin-ui::admin.btn.save') }}
                     </button>
                 </div>
-
+                
             </form>
 
-        </resume-form>
+        </academic-training-form>
 
         </div>
 
         </div>
 
+    
 @endsection

@@ -15,3 +15,5 @@ import './ethnic-group';
 import './requirement-type';
 import './requirement';
 import './resume';
+import './academic-state';
+import './academic-training';
