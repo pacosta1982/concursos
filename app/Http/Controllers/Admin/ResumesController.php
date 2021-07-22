@@ -12,6 +12,7 @@ use App\Http\Requests\Admin\AcademicTraining\DestroyAcademicTraining;
 use App\Http\Requests\Admin\AcademicTraining\IndexAcademicTraining;
 use App\Models\Resume;
 use App\Models\AcademicTraining;
+use App\Models\LanguageLevelResume;
 use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -37,27 +38,30 @@ class ResumesController extends Controller
     public function index(IndexAcademicTraining $request)
     {
         $data = AdminListing::create(AcademicTraining::class)->processRequestAndGet(
-            // pass the request with params
             $request,
-
-            // set columns to query
             ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered'],
-
-            // set columns to searchIn
             ['id', 'name', 'institution']
         );
 
-        if ($request->ajax()) {
-            if ($request->has('bulk')) {
-                return [
-                    'bulkItems' => $data->pluck('id')
-                ];
-            }
-            return ['data' => $data];
-        }
         $resume = Resume::where('created_by', Auth::user()->id)->first();
+        $resumeid = $resume->id;
+        $datalanguage = AdminListing::create(LanguageLevelResume::class)->processRequestAndGet(
+            $request,
+            ['id', 'resume_id', 'language_id', 'language_level_id', 'certificate'],
+            ['id'],
+            function ($query) use ($resumeid) {
+                $query
+                    ->where('language_level_resumes.resume_id', '=', $resumeid);
+                //->orderBy('requirements.requirement_type_id');
+            }
+        );
 
-        return view('applicant.resume.index', compact('resume', 'data'));
+
+
+
+        //$datalanguage = LanguageLevelResume::where('resume_id', $resume->id)->get();
+
+        return view('applicant.resume.index', compact('resume', 'data', 'datalanguage'));
     }
 
     /**

@@ -322,6 +322,8 @@ Route::post('/resume/{resume}/update', 'App\Http\Controllers\Admin\ResumesContro
 //Resume Academic Training
 Route::get('/resume/{resume}/academic-training/create', 'App\Http\Controllers\Admin\AcademicTrainingController@create');
 
+//Resume Language Level
+Route::get('/resume/{resume}/language-level-resumes/create', 'App\Http\Controllers\Admin\LanguageLevelResumesController@create');
 
 Route::get('/resume/{id}/identificaciones', 'App\Http\Controllers\Admin\ResumesController@getIdentificaciones')->name('identificaciones');
 Route::post('/resume', 'App\Http\Controllers\Admin\ResumesController@store')->name('store');
@@ -382,6 +384,53 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'AcademicTrainingController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{academicTraining}',                          'AcademicTrainingController@update')->name('update');
             Route::delete('/{academicTraining}',                        'AcademicTrainingController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('language-level-resumes')->name('language-level-resumes/')->group(static function () {
+            Route::get('/',                                             'LanguageLevelResumesController@index')->name('index');
+            Route::get('/create',                                       'LanguageLevelResumesController@create')->name('create');
+            Route::post('/',                                            'LanguageLevelResumesController@store')->name('store');
+            Route::get('/{languageLevelResume}/edit',                   'LanguageLevelResumesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'LanguageLevelResumesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{languageLevelResume}',                       'LanguageLevelResumesController@update')->name('update');
+            Route::delete('/{languageLevelResume}',                     'LanguageLevelResumesController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('end-reasons')->name('end-reasons/')->group(static function() {
+            Route::get('/',                                             'EndReasonController@index')->name('index');
+            Route::get('/create',                                       'EndReasonController@create')->name('create');
+            Route::post('/',                                            'EndReasonController@store')->name('store');
+            Route::get('/{endReason}/edit',                             'EndReasonController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'EndReasonController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{endReason}',                                 'EndReasonController@update')->name('update');
+            Route::delete('/{endReason}',                               'EndReasonController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('work-experiences')->name('work-experiences/')->group(static function() {
+            Route::get('/',                                             'WorkExperienceController@index')->name('index');
+            Route::get('/create',                                       'WorkExperienceController@create')->name('create');
+            Route::post('/',                                            'WorkExperienceController@store')->name('store');
+            Route::get('/{workExperience}/edit',                        'WorkExperienceController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'WorkExperienceController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{workExperience}',                            'WorkExperienceController@update')->name('update');
+            Route::delete('/{workExperience}',                          'WorkExperienceController@destroy')->name('destroy');
         });
     });
 });

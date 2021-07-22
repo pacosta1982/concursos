@@ -424,5 +424,63 @@ return [
         ],
     ],
 
+    'language-level-resume' => [
+        'title' => 'Language Level Resumes',
+
+        'actions' => [
+            'index' => 'Language Level Resumes',
+            'create' => 'New Language Level Resume',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'resume_id' => 'Resume',
+            'language_id' => 'Language',
+            'language_level_id' => 'Language level',
+            'certificate' => 'Certificate',
+            
+        ],
+    ],
+
+    'end-reason' => [
+        'title' => 'End Reason',
+
+        'actions' => [
+            'index' => 'End Reason',
+            'create' => 'New End Reason',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'work-experience' => [
+        'title' => 'Work Experience',
+
+        'actions' => [
+            'index' => 'Work Experience',
+            'create' => 'New Work Experience',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'resume_id' => 'Resume',
+            'company' => 'Company',
+            'position' => 'Position',
+            'tasks' => 'Tasks',
+            'start' => 'Start',
+            'end' => 'End',
+            'end_reason_id' => 'End reason',
+            'contact' => 'Contact',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

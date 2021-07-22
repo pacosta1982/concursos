@@ -17,3 +17,6 @@ import './requirement';
 import './resume';
 import './academic-state';
 import './academic-training';
+import './language-level-resume';
+import './end-reason';
+import './work-experience';

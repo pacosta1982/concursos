@@ -209,3 +209,43 @@ $factory->define(App\Models\AcademicTraining::class, static function (Faker\Gene
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\LanguageLevelResume::class, static function (Faker\Generator $faker) {
+    return [
+        'resume_id' => $faker->randomNumber(5),
+        'language_id' => $faker->randomNumber(5),
+        'language_level_id' => $faker->randomNumber(5),
+        'certificate' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\EndReason::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\WorkExperience::class, static function (Faker\Generator $faker) {
+    return [
+        'resume_id' => $faker->randomNumber(5),
+        'company' => $faker->sentence,
+        'position' => $faker->sentence,
+        'tasks' => $faker->text(),
+        'start' => $faker->date(),
+        'end' => $faker->date(),
+        'end_reason_id' => $faker->randomNumber(5),
+        'contact' => $faker->text(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
