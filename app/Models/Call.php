@@ -25,7 +25,7 @@ class Call extends Model
 
     ];
 
-    protected $appends = ['resource_url'];
+    protected $appends = ['resource_url', 'is_admin'];
     protected $with = ['CallType', 'Position', 'Company'];
 
     /* ************************ ACCESSOR ************************* */
@@ -33,6 +33,11 @@ class Call extends Model
     public function getResourceUrlAttribute()
     {
         return url('/admin/calls/' . $this->getKey());
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return url('calls/' . $this->getKey());
     }
 
     public function CallType()

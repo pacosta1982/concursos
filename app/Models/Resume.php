@@ -30,11 +30,27 @@ class Resume extends Model
     ];
 
     protected $appends = ['resource_url'];
+    protected $with = ['academic', 'languages', 'work'];
 
     /* ************************ ACCESSOR ************************* */
 
     public function getResourceUrlAttribute()
     {
         return url('/admin/resumes/' . $this->getKey());
+    }
+
+    public function academic()
+    {
+        return $this->hasMany(AcademicTraining::class);
+    }
+
+    public function languages()
+    {
+        return $this->hasMany(LanguageLevelResume::class);
+    }
+
+    public function work()
+    {
+        return $this->hasMany(WorkExperience::class);
     }
 }

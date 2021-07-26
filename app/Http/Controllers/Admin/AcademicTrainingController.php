@@ -32,6 +32,11 @@ class AcademicTrainingController extends Controller
      * @param IndexAcademicTraining $request
      * @return array|Factory|View
      */
+    /*public function __construct()
+    {
+        $this->middleware('auth');
+    }*/
+
     public function index(IndexAcademicTraining $request)
     {
         // create and AdminListing instance for a specific model and

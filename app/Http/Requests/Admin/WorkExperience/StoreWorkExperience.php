@@ -13,10 +13,10 @@ class StoreWorkExperience extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.work-experience.create');
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the request.
@@ -32,17 +32,17 @@ class StoreWorkExperience extends FormRequest
             'tasks' => ['required', 'string'],
             'start' => ['required', 'date'],
             'end' => ['required', 'date'],
-            'end_reason_id' => ['required', 'integer'],
+            'end_reason' => ['required'],
             'contact' => ['required', 'string'],
-            
+
         ];
     }
 
     /**
-    * Modify input data
-    *
-    * @return array
-    */
+     * Modify input data
+     *
+     * @return array
+     */
     public function getSanitized(): array
     {
         $sanitized = $this->validated();

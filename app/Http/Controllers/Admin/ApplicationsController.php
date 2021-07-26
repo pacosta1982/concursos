@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\WorkExperience\BulkDestroyWorkExperience;
-use App\Http\Requests\Admin\WorkExperience\DestroyWorkExperience;
-use App\Http\Requests\Admin\WorkExperience\IndexWorkExperience;
-use App\Http\Requests\Admin\WorkExperience\StoreWorkExperience;
-use App\Http\Requests\Admin\WorkExperience\UpdateWorkExperience;
-use App\Models\WorkExperience;
+use App\Http\Requests\Admin\Application\BulkDestroyApplication;
+use App\Http\Requests\Admin\Application\DestroyApplication;
+use App\Http\Requests\Admin\Application\IndexApplication;
+use App\Http\Requests\Admin\Application\StoreApplication;
+use App\Http\Requests\Admin\Application\UpdateApplication;
+use App\Models\Application;
+use App\Models\Call;
 use App\Models\Resume;
-use App\Models\EndReason;
+use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -22,32 +23,27 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
-class WorkExperienceController extends Controller
+class ApplicationsController extends Controller
 {
 
     /**
      * Display a listing of the resource.
      *
-     * @param IndexWorkExperience $request
+     * @param IndexApplication $request
      * @return array|Factory|View
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    public function index(IndexWorkExperience $request)
+    public function index(IndexApplication $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(WorkExperience::class)->processRequestAndGet(
+        $data = AdminListing::create(Application::class)->processRequestAndGet(
             // pass the request with params
             $request,
 
             // set columns to query
-            ['id', 'resume_id', 'company', 'position', 'start', 'end', 'end_reason_id'],
+            ['id', 'code', 'call_id', 'resume_id', 'data'],
 
             // set columns to searchIn
-            ['id', 'company', 'position', 'tasks', 'contact']
+            ['id', 'code', 'data']
         );
 
         if ($request->ajax()) {
@@ -59,7 +55,7 @@ class WorkExperienceController extends Controller
             return ['data' => $data];
         }
 
-        return view('admin.work-experience.index', ['data' => $data]);
+        return view('admin.application.index', ['data' => $data]);
     }
 
     /**
@@ -68,44 +64,46 @@ class WorkExperienceController extends Controller
      * @throws AuthorizationException
      * @return Factory|View
      */
-    public function create(Resume $resume)
+    public function create(Call $call)
     {
-        //$this->authorize('admin.work-experience.create');
-        $end_reason = EndReason::all();
-        return view('applicant.resume.work-experience.create', compact('resume', 'end_reason'));
+        //$this->authorize('admin.application.create');
+
+        $resume = Resume::where('created_by', Auth::user()->id)->first();
+        return $resume;
+        return view('applicant.applications.create', compact('call', 'resume'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreWorkExperience $request
+     * @param StoreApplication $request
      * @return array|RedirectResponse|Redirector
      */
-    public function store(StoreWorkExperience $request)
+    public function store(StoreApplication $request)
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the WorkExperience
-        $workExperience = WorkExperience::create($sanitized);
+        // Store the Application
+        $application = Application::create($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('resume'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('admin/applications'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('resume');
+        return redirect('admin/applications');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param WorkExperience $workExperience
+     * @param Application $application
      * @throws AuthorizationException
      * @return void
      */
-    public function show(WorkExperience $workExperience)
+    public function show(Application $application)
     {
-        $this->authorize('admin.work-experience.show', $workExperience);
+        $this->authorize('admin.application.show', $application);
 
         // TODO your code goes here
     }
@@ -113,56 +111,56 @@ class WorkExperienceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param WorkExperience $workExperience
+     * @param Application $application
      * @throws AuthorizationException
      * @return Factory|View
      */
-    public function edit(WorkExperience $workExperience)
+    public function edit(Application $application)
     {
-        $this->authorize('admin.work-experience.edit', $workExperience);
+        $this->authorize('admin.application.edit', $application);
 
 
-        return view('admin.work-experience.edit', [
-            'workExperience' => $workExperience,
+        return view('admin.application.edit', [
+            'application' => $application,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateWorkExperience $request
-     * @param WorkExperience $workExperience
+     * @param UpdateApplication $request
+     * @param Application $application
      * @return array|RedirectResponse|Redirector
      */
-    public function update(UpdateWorkExperience $request, WorkExperience $workExperience)
+    public function update(UpdateApplication $request, Application $application)
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values WorkExperience
-        $workExperience->update($sanitized);
+        // Update changed values Application
+        $application->update($sanitized);
 
         if ($request->ajax()) {
             return [
-                'redirect' => url('admin/work-experiences'),
+                'redirect' => url('admin/applications'),
                 'message' => trans('brackets/admin-ui::admin.operation.succeeded'),
             ];
         }
 
-        return redirect('admin/work-experiences');
+        return redirect('admin/applications');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param DestroyWorkExperience $request
-     * @param WorkExperience $workExperience
+     * @param DestroyApplication $request
+     * @param Application $application
      * @throws Exception
      * @return ResponseFactory|RedirectResponse|Response
      */
-    public function destroy(DestroyWorkExperience $request, WorkExperience $workExperience)
+    public function destroy(DestroyApplication $request, Application $application)
     {
-        $workExperience->delete();
+        $application->delete();
 
         if ($request->ajax()) {
             return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
@@ -174,17 +172,17 @@ class WorkExperienceController extends Controller
     /**
      * Remove the specified resources from storage.
      *
-     * @param BulkDestroyWorkExperience $request
+     * @param BulkDestroyApplication $request
      * @throws Exception
      * @return Response|bool
      */
-    public function bulkDestroy(BulkDestroyWorkExperience $request): Response
+    public function bulkDestroy(BulkDestroyApplication $request): Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])
                 ->chunk(1000)
                 ->each(static function ($bulkChunk) {
-                    WorkExperience::whereIn('id', $bulkChunk)->delete();
+                    Application::whereIn('id', $bulkChunk)->delete();
 
                     // TODO your code goes here
                 });

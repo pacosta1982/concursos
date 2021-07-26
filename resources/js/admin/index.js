@@ -20,3 +20,4 @@ import './academic-training';
 import './language-level-resume';
 import './end-reason';
 import './work-experience';
+import './application';

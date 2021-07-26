@@ -249,3 +249,16 @@ $factory->define(App\Models\WorkExperience::class, static function (Faker\Genera
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Application::class, static function (Faker\Generator $faker) {
+    return [
+        'code' => $faker->sentence,
+        'call_id' => $faker->randomNumber(5),
+        'resume_id' => $faker->randomNumber(5),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        'data' => ['en' => $faker->sentence],
+        
+    ];
+});

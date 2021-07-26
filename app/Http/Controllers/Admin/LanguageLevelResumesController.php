@@ -32,6 +32,11 @@ class LanguageLevelResumesController extends Controller
      * @param IndexLanguageLevelResume $request
      * @return array|Factory|View
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(IndexLanguageLevelResume $request)
     {
         // create and AdminListing instance for a specific model and

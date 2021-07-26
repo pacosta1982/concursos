@@ -13,6 +13,7 @@ use App\Http\Requests\Admin\AcademicTraining\IndexAcademicTraining;
 use App\Models\Resume;
 use App\Models\AcademicTraining;
 use App\Models\LanguageLevelResume;
+use App\Models\WorkExperience;
 use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -35,16 +36,44 @@ class ResumesController extends Controller
      * @param IndexResume $request
      * @return array|Factory|View
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(IndexAcademicTraining $request)
     {
+        $resume = Resume::where('created_by', Auth::user()->id)->first();
+        $resumeid = $resume->id;
+
         $data = AdminListing::create(AcademicTraining::class)->processRequestAndGet(
             $request,
             ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered'],
-            ['id', 'name', 'institution']
+            ['id', 'name', 'institution'],
+            function ($query) use ($resumeid) {
+                $query
+                    ->where('academic_training.resume_id', '=', $resumeid);
+                //->orderBy('requirements.requirement_type_id');
+            }
         );
 
-        $resume = Resume::where('created_by', Auth::user()->id)->first();
-        $resumeid = $resume->id;
+        $datawork = AdminListing::create(WorkExperience::class)->processRequestAndGet(
+            // pass the request with params
+            $request,
+
+            // set columns to query
+            ['id', 'resume_id', 'company', 'position', 'start', 'end', 'end_reason_id', 'tasks', 'contact'],
+
+            // set columns to searchIn
+            ['id', 'company', 'position', 'tasks', 'contact'],
+            function ($query) use ($resumeid) {
+                $query
+                    ->where('work_experience.resume_id', '=', $resumeid);
+                //->orderBy('requirements.requirement_type_id');
+            }
+        );
+
+
         $datalanguage = AdminListing::create(LanguageLevelResume::class)->processRequestAndGet(
             $request,
             ['id', 'resume_id', 'language_id', 'language_level_id', 'certificate'],
@@ -61,7 +90,7 @@ class ResumesController extends Controller
 
         //$datalanguage = LanguageLevelResume::where('resume_id', $resume->id)->get();
 
-        return view('applicant.resume.index', compact('resume', 'data', 'datalanguage'));
+        return view('applicant.resume.index', compact('resume', 'data', 'datalanguage', 'datawork'));
     }
 
     /**

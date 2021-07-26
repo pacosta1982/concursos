@@ -482,5 +482,24 @@ return [
         ],
     ],
 
+    'application' => [
+        'title' => 'Applications',
+
+        'actions' => [
+            'index' => 'Applications',
+            'create' => 'New Application',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'code' => 'Code',
+            'call_id' => 'Call',
+            'resume_id' => 'Resume',
+            'data' => 'Data',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

@@ -1,10 +1,10 @@
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('resume_id'), 'has-success': fields.resume_id && fields.resume_id.valid }">
+<!--<div class="form-group row align-items-center" :class="{'has-danger': errors.has('resume_id'), 'has-success': fields.resume_id && fields.resume_id.valid }">
     <label for="resume_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.work-experience.columns.resume_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.resume_id" v-validate="'required|integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('resume_id'), 'form-control-success': fields.resume_id && fields.resume_id.valid}" id="resume_id" name="resume_id" placeholder="{{ trans('admin.work-experience.columns.resume_id') }}">
         <div v-if="errors.has('resume_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('resume_id') }}</div>
     </div>
-</div>
+</div> -->
 
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('company'), 'has-success': fields.company && fields.company.valid }">
     <label for="company" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.work-experience.columns.company') }}</label>
@@ -57,7 +57,21 @@
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('end_reason_id'), 'has-success': fields.end_reason_id && fields.end_reason_id.valid }">
     <label for="end_reason_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.work-experience.columns.end_reason_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.end_reason_id" v-validate="'required|integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('end_reason_id'), 'form-control-success': fields.end_reason_id && fields.end_reason_id.valid}" id="end_reason_id" name="end_reason_id" placeholder="{{ trans('admin.work-experience.columns.end_reason_id') }}">
+        <!--<input type="text" v-model="form.end_reason_id" v-validate="'required|integer'"
+        @input="validate($event)" class="form-control"
+        :class="{'form-control-danger': errors.has('end_reason_id'), 'form-control-success': fields.end_reason_id && fields.end_reason_id.valid}"
+        id="end_reason_id" name="end_reason_id"
+        placeholder="{{ trans('admin.work-experience.columns.end_reason_id') }}">-->
+        <multiselect
+            v-model="form.end_reason"
+            :options="end_reason"
+            :multiple="false"
+            track-by="id"
+            label="name"
+            :taggable="true"
+            tag-placeholder=""
+            placeholder="{{ trans('admin.work-experience.columns.end_reason_id') }}">
+        </multiselect>
         <div v-if="errors.has('end_reason_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('end_reason_id') }}</div>
     </div>
 </div>
