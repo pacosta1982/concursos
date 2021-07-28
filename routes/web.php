@@ -319,6 +319,8 @@ Route::get('/resume/create', 'App\Http\Controllers\Admin\ResumesController@creat
 Route::get('/resume/{resume}/edit', 'App\Http\Controllers\Admin\ResumesController@edit');
 Route::post('/resume/{resume}/update', 'App\Http\Controllers\Admin\ResumesController@update')->name('update');
 
+//Resume PDF
+Route::get('/resume/pdf', 'App\Http\Controllers\Admin\ResumesController@createPDF');
 //Resume Academic Training
 Route::get('/resume/{resume}/academic-training/create', 'App\Http\Controllers\Admin\AcademicTrainingController@create');
 
@@ -487,8 +489,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('statuses')->name('statuses/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('statuses')->name('statuses/')->group(static function () {
             Route::get('/',                                             'StatusesController@index')->name('index');
             Route::get('/create',                                       'StatusesController@create')->name('create');
             Route::post('/',                                            'StatusesController@store')->name('store');
@@ -502,8 +504,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('call-statuses')->name('call-statuses/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('call-statuses')->name('call-statuses/')->group(static function () {
             Route::get('/',                                             'CallStatusesController@index')->name('index');
             Route::get('/create',                                       'CallStatusesController@create')->name('create');
             Route::post('/',                                            'CallStatusesController@store')->name('store');
@@ -517,8 +519,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('disability-resumes')->name('disability-resumes/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('disability-resumes')->name('disability-resumes/')->group(static function () {
             Route::get('/',                                             'DisabilityResumesController@index')->name('index');
             Route::get('/create',                                       'DisabilityResumesController@create')->name('create');
             Route::post('/',                                            'DisabilityResumesController@store')->name('store');
@@ -532,8 +534,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('ethnic-resumes')->name('ethnic-resumes/')->group(static function() {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('ethnic-resumes')->name('ethnic-resumes/')->group(static function () {
             Route::get('/',                                             'EthnicResumesController@index')->name('index');
             Route::get('/create',                                       'EthnicResumesController@create')->name('create');
             Route::post('/',                                            'EthnicResumesController@store')->name('store');

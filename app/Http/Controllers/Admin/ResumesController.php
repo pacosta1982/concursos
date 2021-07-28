@@ -28,6 +28,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use PDF;
 
 class ResumesController extends Controller
 {
@@ -47,7 +48,7 @@ class ResumesController extends Controller
     {
         $resume = Resume::where('created_by', Auth::user()->id)->first();
         $resumeid = $resume->id;
-        return $resume;
+        //return $resume;
         $data = AdminListing::create(AcademicTraining::class)->processRequestAndGet(
             $request,
             ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered'],
@@ -115,6 +116,25 @@ class ResumesController extends Controller
         //$datalanguage = LanguageLevelResume::where('resume_id', $resume->id)->get();
 
         return view('applicant.resume.index', compact('resume', 'data', 'datalanguage', 'datawork', 'datadisability', 'ethnic'));
+    }
+
+
+    public function createPDF()
+    {
+
+        $resume = Resume::where('created_by', Auth::user()->id)->first();
+        $pdf = PDF::loadView('applicant.resume.pdf.resume', compact('resume'));
+        return $pdf->download('CV-' . $resume->names . $resume->last_names . '.pdf');
+        //return 'pdf';
+        // retreive all records from db
+        /*$data = Resume::all();
+
+        // share data to view
+        view()->share('employee', $data);
+        $pdf = PDF::loadView('pdf_view', $data);
+
+        // download PDF file with download method
+        return $pdf->download('pdf_file.pdf');*/
     }
 
     /**
