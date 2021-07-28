@@ -24,6 +24,9 @@
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/applications') }}"><i class="nav-icon icon-energy"></i> {{ trans('admin.application.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/statuses') }}"><i class="nav-icon icon-ghost"></i> {{ trans('admin.status.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/application-statuses') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.application-status.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/call-statuses') }}"><i class="nav-icon icon-puzzle"></i> {{ trans('admin.call-status.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/disability-resumes') }}"><i class="nav-icon icon-diamond"></i> {{ trans('admin.disability-resume.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/ethnic-resumes') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.ethnic-resume.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>

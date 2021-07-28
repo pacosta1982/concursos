@@ -297,3 +297,71 @@ $factory->define(App\Models\ApplicationStatus::class, static function (Faker\Gen
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Status::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'color' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        'type' => $faker->sentence,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\CallStatus::class, static function (Faker\Generator $faker) {
+    return [
+        'call_id' => $faker->randomNumber(5),
+        'status_id' => $faker->randomNumber(5),
+        'user' => $faker->sentence,
+        'user_model' => $faker->sentence,
+        'description' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\DisabilityResume::class, static function (Faker\Generator $faker) {
+    return [
+        'disability_id' => $faker->randomNumber(5),
+        'cause' => $faker->sentence,
+        'percent' => $faker->randomNumber(5),
+        'certificate' => $faker->sentence,
+        'certificate_date' => $faker->date(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\DisabilityResume::class, static function (Faker\Generator $faker) {
+    return [
+        'resume_id' => $faker->randomNumber(5),
+        'disability_id' => $faker->randomNumber(5),
+        'cause' => $faker->sentence,
+        'percent' => $faker->randomNumber(5),
+        'certificate' => $faker->sentence,
+        'certificate_date' => $faker->date(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\EthnicResume::class, static function (Faker\Generator $faker) {
+    return [
+        'resume_id' => $faker->randomNumber(5),
+        'name' => $faker->firstName,
+        'zone' => $faker->sentence,
+        'registered' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

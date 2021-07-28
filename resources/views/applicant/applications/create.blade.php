@@ -188,5 +188,67 @@
     </div>
   </div>
 
+  <div class="card">
+    <div class="card-header text-center">
+         DISCAPACIDAD
+    </div>
+
+    <div class="card-body">
+        <table class="table table-hover table-listing">
+            <thead>
+                <tr>
+                    <th >{{ trans('admin.disability-resume.columns.disability_id') }}</th>
+                    <th >{{ trans('admin.disability-resume.columns.cause') }}</th>
+                    <th >{{ trans('admin.disability-resume.columns.percent') }}</th>
+                    <th class="text-center">{{ trans('admin.disability-resume.columns.certificate') }}</th>
+                    <th >{{ trans('admin.disability-resume.columns.certificate_date') }}</th>
+                    <th ></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($resume->disability as $item)
+                <tr>
+                    <td>{{$item->disability->name}}</td>
+                    <td>{{$item->cause}}</td>
+                    <td>{{$item->percent}}</td>
+                    <td class="text-center"><i class="{{ $item->certificate ? 'fa fa-check text-success' : 'fa fa-times text-danger '}}" aria-hidden="true"></i></td>
+                    <td>{{$item->certificate_date}}</td>
+                    <td></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header text-center">
+         GRUPO ETHNICO
+    </div>
+
+    <div class="card-body">
+        <table class="table table-hover table-listing">
+            <thead>
+                <tr>
+                    <th >{{ trans('admin.ethnic-resume.columns.name') }}</th>
+                    <th >{{ trans('admin.ethnic-resume.columns.zone') }}</th>
+                    <th class="text-center">{{ trans('admin.ethnic-resume.columns.registered') }}</th>
+                    <th ></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($resume->ethnic as $item)
+                <tr>
+                    <td>{{$item->name}}</td>
+                    <td>{{$item->zone}}</td>
+                    <td class="text-center"><i class="{{ $item->registered ? 'fa fa-check text-success' : 'fa fa-times text-danger '}}" aria-hidden="true"></i></td>
+                    <td></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+  </div>
+
 
 @endsection

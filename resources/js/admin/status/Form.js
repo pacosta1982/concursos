@@ -7,6 +7,7 @@ Vue.component('status-form', {
             form: {
                 name:  '' ,
                 color:  '' ,
+                type:  '' ,
                 
             }
         }

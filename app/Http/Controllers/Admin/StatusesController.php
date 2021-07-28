@@ -37,7 +37,7 @@ class StatusesController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'name', 'color'],
+            ['id', 'name', 'color', 'type'],
 
             // set columns to searchIn
             ['id', 'name', 'color']

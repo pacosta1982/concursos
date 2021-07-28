@@ -28,6 +28,7 @@ class UpdateStatus extends FormRequest
         return [
             'name' => ['sometimes', 'string'],
             'color' => ['nullable', 'string'],
+            'type' => ['nullable', 'string'],
             
         ];
     }

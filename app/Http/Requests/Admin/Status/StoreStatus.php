@@ -28,6 +28,7 @@ class StoreStatus extends FormRequest
         return [
             'name' => ['required', 'string'],
             'color' => ['nullable', 'string'],
+            'type' => ['nullable', 'string'],
             
         ];
     }

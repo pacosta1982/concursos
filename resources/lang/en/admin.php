@@ -554,5 +554,103 @@ return [
         ],
     ],
 
+    'status' => [
+        'title' => 'Statuses',
+
+        'actions' => [
+            'index' => 'Statuses',
+            'create' => 'New Status',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'color' => 'Color',
+            'type' => 'Type',
+            
+        ],
+    ],
+
+    'call-status' => [
+        'title' => 'Call Statuses',
+
+        'actions' => [
+            'index' => 'Call Statuses',
+            'create' => 'New Call Status',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'call_id' => 'Call',
+            'status_id' => 'Status',
+            'user' => 'User',
+            'user_model' => 'User model',
+            'description' => 'Description',
+            
+        ],
+    ],
+
+    'disability-resume' => [
+        'title' => 'Disability Resumes',
+
+        'actions' => [
+            'index' => 'Disability Resumes',
+            'create' => 'New Disability Resume',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'disability_id' => 'Disability',
+            'cause' => 'Cause',
+            'percent' => 'Percent',
+            'certificate' => 'Certificate',
+            'certificate_date' => 'Certificate date',
+            
+        ],
+    ],
+
+    'disability-resume' => [
+        'title' => 'Disability Resumes',
+
+        'actions' => [
+            'index' => 'Disability Resumes',
+            'create' => 'New Disability Resume',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'resume_id' => 'Resume',
+            'disability_id' => 'Disability',
+            'cause' => 'Cause',
+            'percent' => 'Percent',
+            'certificate' => 'Certificate',
+            'certificate_date' => 'Certificate date',
+            
+        ],
+    ],
+
+    'ethnic-resume' => [
+        'title' => 'Ethnic Resumes',
+
+        'actions' => [
+            'index' => 'Ethnic Resumes',
+            'create' => 'New Ethnic Resume',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'resume_id' => 'Resume',
+            'name' => 'Name',
+            'zone' => 'Zone',
+            'registered' => 'Registered',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

@@ -25,7 +25,7 @@ class IndexStatus extends FormRequest
     public function rules(): array
     {
         return [
-            'orderBy' => 'in:id,name,color|nullable',
+            'orderBy' => 'in:id,name,color,type|nullable',
             'orderDirection' => 'in:asc,desc|nullable',
             'search' => 'string|nullable',
             'page' => 'integer|nullable',

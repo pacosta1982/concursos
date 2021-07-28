@@ -23,3 +23,7 @@ import './work-experience';
 import './application';
 import './status';
 import './application-status';
+import './status';
+import './call-status';
+import './disability-resume';
+import './ethnic-resume';

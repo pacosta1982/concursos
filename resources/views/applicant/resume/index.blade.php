@@ -9,6 +9,8 @@
     @include('applicant.resume.body')
     @include('applicant.resume.work')
     @include('applicant.resume.language')
+    @include('applicant.resume.disability')
+    @include('applicant.resume.ethnic')
 @else
     <a href="/resume/create" class="btn btn-block btn-square btn-lg bg-primary"><i class="fa fa-plus"></i> Crea Tu Currículo</a>
 @endif

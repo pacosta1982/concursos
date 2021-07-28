@@ -14,6 +14,8 @@ use App\Models\Resume;
 use App\Models\AcademicTraining;
 use App\Models\LanguageLevelResume;
 use App\Models\WorkExperience;
+use App\Models\DisabilityResume;
+use App\Models\EthnicResume;
 use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -45,7 +47,7 @@ class ResumesController extends Controller
     {
         $resume = Resume::where('created_by', Auth::user()->id)->first();
         $resumeid = $resume->id;
-
+        return $resume;
         $data = AdminListing::create(AcademicTraining::class)->processRequestAndGet(
             $request,
             ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered'],
@@ -85,12 +87,34 @@ class ResumesController extends Controller
             }
         );
 
+        $datadisability = AdminListing::create(DisabilityResume::class)->processRequestAndGet(
+            $request,
+            ['id', 'resume_id', 'disability_id', 'cause', 'percent', 'certificate', 'certificate_date'],
+            ['id', 'cause', 'certificate'],
+            function ($query) use ($resumeid) {
+                $query
+                    ->where('disability_resumes.resume_id', '=', $resumeid);
+                //->orderBy('requirements.requirement_type_id');
+            }
+        );
+
+        $ethnic = AdminListing::create(EthnicResume::class)->processRequestAndGet(
+            $request,
+            ['id', 'resume_id', 'name', 'zone', 'registered'],
+            ['id', 'name', 'zone'],
+            function ($query) use ($resumeid) {
+                $query
+                    ->where('ethnic_resumes.resume_id', '=', $resumeid);
+                //->orderBy('requirements.requirement_type_id');
+            }
+        );
+
 
 
 
         //$datalanguage = LanguageLevelResume::where('resume_id', $resume->id)->get();
 
-        return view('applicant.resume.index', compact('resume', 'data', 'datalanguage', 'datawork'));
+        return view('applicant.resume.index', compact('resume', 'data', 'datalanguage', 'datawork', 'datadisability', 'ethnic'));
     }
 
     /**

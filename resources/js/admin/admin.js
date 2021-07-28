@@ -22,6 +22,7 @@ import './index';
 import 'craftable/dist/ui';
 
 Vue.component('multiselect', Multiselect);
+Vue.component('chart-component', require('../components/ChartComponent.vue').default);
 Vue.use(VeeValidate, { strict: true });
 Vue.component('datetime', flatPickr);
 Vue.use(VModal, { dialog: true, dynamic: true, injectModalsContainer: true });

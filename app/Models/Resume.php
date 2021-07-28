@@ -30,7 +30,7 @@ class Resume extends Model
     ];
 
     protected $appends = ['resource_url'];
-    protected $with = ['academic', 'languages', 'work'];
+    protected $with = ['academic', 'languages', 'work', 'disability', 'ethnic'];
 
     /* ************************ ACCESSOR ************************* */
 
@@ -52,5 +52,15 @@ class Resume extends Model
     public function work()
     {
         return $this->hasMany(WorkExperience::class);
+    }
+
+    public function disability()
+    {
+        return $this->hasMany(DisabilityResume::class);
+    }
+
+    public function ethnic()
+    {
+        return $this->hasMany(EthnicResume::class);
     }
 }
