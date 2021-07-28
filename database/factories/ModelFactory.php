@@ -262,3 +262,38 @@ $factory->define(App\Models\Application::class, static function (Faker\Generator
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Status::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Status::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'color' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\ApplicationStatus::class, static function (Faker\Generator $faker) {
+    return [
+        'application_id' => $faker->randomNumber(5),
+        'status_id' => $faker->randomNumber(5),
+        'user' => $faker->sentence,
+        'user_model' => $faker->sentence,
+        'description' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

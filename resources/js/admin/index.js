@@ -21,3 +21,5 @@ import './language-level-resume';
 import './end-reason';
 import './work-experience';
 import './application';
+import './status';
+import './application-status';

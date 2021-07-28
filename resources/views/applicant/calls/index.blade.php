@@ -4,10 +4,10 @@
 
 @section('body')
 
-
 <call-listing
         :data="{{ $data->toJson() }}"
         :url="'{{ url('calls') }}'"
+        status="{{ session('status') }}"
         inline-template>
 
         <div class="row">
@@ -99,7 +99,5 @@
             </div>
         </div>
     </call-listing>
-
-
 
 @endsection

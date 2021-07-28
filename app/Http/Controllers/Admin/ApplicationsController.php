@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\Application\StoreApplication;
 use App\Http\Requests\Admin\Application\UpdateApplication;
 use App\Models\Application;
 use App\Models\Call;
+use App\Models\ApplicationStatus;
 use App\Models\Resume;
 use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
@@ -35,6 +36,9 @@ class ApplicationsController extends Controller
     public function index(IndexApplication $request)
     {
         // create and AdminListing instance for a specific model and
+        $resume = Resume::where('created_by', Auth::user()->id)->first();
+        $authID = $resume->id;
+        //$authID = Auth::user()->id;
         $data = AdminListing::create(Application::class)->processRequestAndGet(
             // pass the request with params
             $request,
@@ -43,8 +47,15 @@ class ApplicationsController extends Controller
             ['id', 'code', 'call_id', 'resume_id', 'data'],
 
             // set columns to searchIn
-            ['id', 'code', 'data']
+            ['id', 'code', 'data'],
+            function ($query) use ($authID) {
+                $query
+                    ->where('applications.resume_id', '=', $authID);
+                //->orderBy('requirements.requirement_type_id');
+            }
         );
+
+        //return $data;
 
         if ($request->ajax()) {
             if ($request->has('bulk')) {
@@ -55,7 +66,7 @@ class ApplicationsController extends Controller
             return ['data' => $data];
         }
 
-        return view('admin.application.index', ['data' => $data]);
+        return view('applicant.applications.index', ['data' => $data]);
     }
 
     /**
@@ -69,8 +80,67 @@ class ApplicationsController extends Controller
         //$this->authorize('admin.application.create');
 
         $resume = Resume::where('created_by', Auth::user()->id)->first();
-        return $resume;
+
+        //return $resume;
         return view('applicant.applications.create', compact('call', 'resume'));
+    }
+
+    public function transition(Call $call, Resume $resume)
+    {
+
+
+        $app = Application::where('call_id', $call->id)
+            ->where('resume_id', $resume->id)->exists();
+        //dd($app);
+        //->first();
+
+        if (!$app) {
+            # code...
+            $application = new Application;
+
+            $application->code = 'ABC';
+            $application->call_id = $call->id;
+            $application->resume_id = $resume->id;
+            $application->data = $resume->toJson();
+            $application->save();
+
+            $status = new ApplicationStatus;
+
+            $status->application_id = $application->id;
+            $status->status_id = 1;
+            $status->user = Auth::user()->id;
+            $status->user_model = 'App\Models\User';
+
+            $status->save();
+            return redirect('applications')->with('status', 'success');;
+        } else {
+            return redirect('calls')->with('status', 'error');
+            # code...
+            //return redirect('calls')->withErrors('message', 'Selected query is deleted successfully.');
+            //if ($request->ajax()) {
+            //return ['redirect' => url('calls'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            //}
+
+            //return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+
+        }
+
+
+
+
+
+
+        //return $application->data;
+
+        //$this->authorize('admin.application.create');
+
+        //$resume = Resume::where('created_by', Auth::user()->id)->first();
+
+        //return $resume;
+        //return view('applicant.applications.create', compact('call', 'resume'));
+        //return $resume;
+        //return view('applicant.applications.transition', compact('resume', 'call'));
+
     }
 
     /**
@@ -81,10 +151,13 @@ class ApplicationsController extends Controller
      */
     public function store(StoreApplication $request)
     {
-        // Sanitize input
+        return $request;
+        dd($request);
+        //Sanitize input
         $sanitized = $request->getSanitized();
 
         // Store the Application
+        dd($sanitized);
         $application = Application::create($sanitized);
 
         if ($request->ajax()) {

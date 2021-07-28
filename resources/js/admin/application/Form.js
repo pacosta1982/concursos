@@ -2,14 +2,15 @@ import AppForm from '../app-components/Form/AppForm';
 
 Vue.component('application-form', {
     mixins: [AppForm],
-    data: function() {
+    props: ['data', 'call', 'resume'],
+    data: function () {
         return {
             form: {
-                code:  '' ,
-                call_id:  '' ,
-                resume_id:  '' ,
-                data:  this.getLocalizedFormDefaults() ,
-                
+                code: '1',
+                call_id: '1',
+                resume_id: '1',
+                data: '',
+
             }
         }
     }

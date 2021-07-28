@@ -3,37 +3,48 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Brackets\Translatable\Traits\HasTranslations;
+
 
 class Application extends Model
 {
-use HasTranslations;
+
     protected $fillable = [
         'code',
         'call_id',
         'resume_id',
         'data',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
     // these attributes are translatable
     public $translatable = [
         'data',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
+    protected $with = ['call', 'statuses'];
 
     /* ************************ ACCESSOR ************************* */
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/applications/'.$this->getKey());
+        return url('/admin/applications/' . $this->getKey());
+    }
+
+    public function call()
+    {
+        return $this->belongsTo('App\Models\Call');
+    }
+
+    public function statuses()
+    {
+        return $this->hasOne('App\Models\ApplicationStatus')->latest('id');
     }
 }

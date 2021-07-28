@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header text-center">
          CURRICULO - {{$resume->names}} {{$resume->last_names}}
-        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/academic-trainings/edit') }}" role="button"><i class="fa fa-edit"></i>&nbsp; Editar</a>
+        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('resume/'.$resume->id.'/edit') }}" role="button"><i class="fa fa-edit"></i>&nbsp; Editar</a>
     </div>
     <!--<h5 class="card-header text-center">Currículo - {{$resume->names}} {{$resume->last_names}}</h5>-->
     <div class="card-body">

@@ -18,17 +18,18 @@ class StoreApplication extends TranslatableFormRequest
         return Gate::allows('admin.application.create');
     }
 
-/**
+    /**
      * Get the validation rules that apply to the requests untranslatable fields.
      *
      * @return array
      */
-    public function untranslatableRules(): array {
+    public function untranslatableRules(): array
+    {
         return [
-            'code' => ['required', 'string'],
-            'call_id' => ['required', 'integer'],
-            'resume_id' => ['required', 'integer'],
-            
+            'code' => ['nullable'],
+            'call_id' => ['nulabble'],
+            'resume_id' => ['nullable'],
+
         ];
     }
 
@@ -37,18 +38,19 @@ class StoreApplication extends TranslatableFormRequest
      *
      * @return array
      */
-    public function translatableRules($locale): array {
+    public function translatableRules($locale): array
+    {
         return [
             'data' => ['nullable', 'string'],
-            
+
         ];
     }
 
     /**
-    * Modify input data
-    *
-    * @return array
-    */
+     * Modify input data
+     *
+     * @return array
+     */
     public function getSanitized(): array
     {
         $sanitized = $this->validated();

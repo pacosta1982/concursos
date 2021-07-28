@@ -501,5 +501,58 @@ return [
         ],
     ],
 
+    'status' => [
+        'title' => 'Statuses',
+
+        'actions' => [
+            'index' => 'Statuses',
+            'create' => 'New Status',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'status' => [
+        'title' => 'Statuses',
+
+        'actions' => [
+            'index' => 'Statuses',
+            'create' => 'New Status',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'color' => 'Color',
+            
+        ],
+    ],
+
+    'application-status' => [
+        'title' => 'Application Statuses',
+
+        'actions' => [
+            'index' => 'Application Statuses',
+            'create' => 'New Application Status',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'application_id' => 'Application',
+            'status_id' => 'Status',
+            'user' => 'User',
+            'user_model' => 'User model',
+            'description' => 'Description',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];
