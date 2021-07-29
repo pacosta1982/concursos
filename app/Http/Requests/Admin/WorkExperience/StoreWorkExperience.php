@@ -51,4 +51,12 @@ class StoreWorkExperience extends FormRequest
 
         return $sanitized;
     }
+
+    public function getEndReasonId()
+    {
+        if ($this->has('end_reason')) {
+            return $this->get('end_reason')['id'];
+        }
+        return null;
+    }
 }

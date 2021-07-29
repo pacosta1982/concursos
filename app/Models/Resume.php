@@ -17,7 +17,7 @@ class Resume extends Model
         'neighborhood',
         'phone',
         'email',
-        'creatd_by'
+        'created_by',
 
     ];
 

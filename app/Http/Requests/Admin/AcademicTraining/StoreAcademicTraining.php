@@ -13,10 +13,11 @@ class StoreAcademicTraining extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.academic-training.create');
     }
+    */
 
     /**
      * Get the validation rules that apply to the request.

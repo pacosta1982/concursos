@@ -6,16 +6,17 @@ Vue.component('resume-form', {
     data: function () {
         return {
             form: {
-                names: 'PEDRO ALEJANDRO',
-                last_names: 'ACOSTA MELO',
-                government_id: '3496101',
-                birthdate: '1982-05-10T00:00:00-04:00',
-                gender: 'M',
-                nationality: 'PARAGUAYA',
+                names: '',
+                last_names: '',
+                government_id: '',
+                birthdate: '',
+                gender: '',
+                nationality: '',
                 address: '',
                 neighborhood: '',
                 phone: '',
                 email: '',
+                created_by: '',
 
             },
             datePickerConfig: {
@@ -28,9 +29,42 @@ Vue.component('resume-form', {
     methods: {
         findData: function () {
 
+            //console.log(this.form.government_id)
             let loader = this.$loading.show({
                 canCancel: false,
-            });
+            })
+            axios
+                .get(this.finddataurl + '/' + this.form.government_id + '/identificaciones')
+                .then(response => {
+                    console.log(response.data)
+                    if (!response.data.error) {
+                        loader.hide();
+                        console.log('funciona')
+                        this.form.names = response.data.message.nombres;
+                        this.form.last_names = response.data.message.apellido;
+                        this.form.gender = response.data.message.sexo;
+                        this.form.nationality = response.data.message.nacionalidadBean;
+                        this.form.birthdate = response.data.message.fechNacim;
+                        //var date = new Date(response.data.message.fechNacim);
+                        //this.form.birthdate = date.toISOString().split('T')[0];
+                    } else {
+                        loader.hide();
+                        console.log('No funciona')
+                    }
+                })
+                .catch(function (error) {
+                    loader.hide();
+                    console.log(error);
+                    this.form.names = '';
+                    this.form.last_names = '';
+                    this.form.gender = '';
+                    this.form.nationality = '';
+                    //loader.hide();
+                    this.$notify({ type: 'error', title: 'Error buscando datos', text: error });
+                })
+            /*let loader = this.$loading.show({
+                canCancel: false,
+            });*/
 
             /*axios.get(this.finddataurl + '/' + this.form.government_id + '/hadbenefit').then(
                 (response) => {
@@ -45,7 +79,7 @@ Vue.component('resume-form', {
                     }
                 });*/
 
-            axios.get(this.finddataurl + '/' + this.form.government_id + '/identificaciones').then(
+            /*axios.get(this.finddataurl + '/' + this.form.government_id + '/identificaciones').then(
                 (response) => {
                     loader.hide();
                     if (response.data.error === false) {
@@ -61,7 +95,11 @@ Vue.component('resume-form', {
                         loader.hide();
                         this.$notify({ type: 'error', title: 'Error buscando datos', text: response.data.message });
                     }
-                })
+                }).catch(function (error) {
+                    //console.log(error);
+                    loader.hide();
+                    //this.$notify({ type: 'error', title: 'Error buscando datos', text: 'abc' });
+                })*/
         },
         onCancel: function () {
             console.log('User cancelled the loader.')

@@ -4,14 +4,16 @@
 
 @section('body')
 
-    <div class="container-xl">
+
+<div class="container-xl">
+
+<div class="container-xl">
 
                 <div class="card">
 
-        <academic-training-form
-            :action="'{{ url('resume/academic-training') }}'"
-            :education="{{ $education_level->toJson() }}"
-            :academic="{{ $academic_state->toJson() }}"
+        <disability-resume-form
+            :action="'{{ url('/resume/disability-resumes') }}'"
+            :disability="{{ $disability->toJson() }}"
             :resume="{{ $resume->id }}"
             v-cloak
             inline-template>
@@ -19,11 +21,11 @@
             <form class="form-horizontal form-create" method="post" @submit.prevent="onSubmit" :action="action" novalidate>
 
                 <div class="card-header">
-                    <i class="fa fa-plus"></i> {{ trans('admin.academic-training.actions.create') }}
+                    <i class="fa fa-plus"></i> {{ trans('admin.disability-resume.actions.create') }}
                 </div>
 
                 <div class="card-body">
-                    @include('admin.academic-training.components.form-elements')
+                    @include('admin.disability-resume.components.form-elements')
                 </div>
 
                 <div class="card-footer">
@@ -35,7 +37,7 @@
 
             </form>
 
-        </academic-training-form>
+        </disability-resume-form>
 
         </div>
 

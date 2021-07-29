@@ -13,10 +13,10 @@ class StoreDisabilityResume extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.disability-resume.create');
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the request.
@@ -27,20 +27,20 @@ class StoreDisabilityResume extends FormRequest
     {
         return [
             'resume_id' => ['required', 'integer'],
-            'disability_id' => ['required', 'integer'],
+            'disability' => ['required'],
             'cause' => ['nullable', 'string'],
             'percent' => ['required', 'integer'],
             'certificate' => ['nullable', 'string'],
             'certificate_date' => ['nullable', 'date'],
-            
+
         ];
     }
 
     /**
-    * Modify input data
-    *
-    * @return array
-    */
+     * Modify input data
+     *
+     * @return array
+     */
     public function getSanitized(): array
     {
         $sanitized = $this->validated();
@@ -48,5 +48,13 @@ class StoreDisabilityResume extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getDisabilityId()
+    {
+        if ($this->has('disability')) {
+            return $this->get('disability')['id'];
+        }
+        return null;
     }
 }

@@ -3,7 +3,7 @@
 @section('title', trans('admin.applicant.actions.trakings'))
 
 @section('body')
-
+@if ($resume)
 <!--<a href={{ url('calls/'.$call->id.'/application/'.$resume->id.'/transition') }} class="btn btn-block bg-warning" type="button"> <strong><i class="fa fa-paper-plane"></i> Enviar Postulación</strong></a>
 <br> -->
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -249,6 +249,21 @@
         </table>
     </div>
   </div>
+@else
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Importante!</strong> <br>
+
+    <h4>Para postularse debe crear un curriculo primero.</h4>
+
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    <a href="/resume/create" class="btn btn-block btn-square btn-lg bg-primary"><i class="fa fa-plus"></i> Crea Tu Currículo</a>
+@endif
+
+
 
 
 @endsection

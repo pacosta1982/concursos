@@ -323,19 +323,26 @@ Route::post('/resume/{resume}/update', 'App\Http\Controllers\Admin\ResumesContro
 Route::get('/resume/pdf', 'App\Http\Controllers\Admin\ResumesController@createPDF');
 //Resume Academic Training
 Route::get('/resume/{resume}/academic-training/create', 'App\Http\Controllers\Admin\AcademicTrainingController@create');
+Route::post('/resume/academic-training/', 'App\Http\Controllers\Admin\AcademicTrainingController@store');
 
 
 //Resume Language Level
 Route::get('/resume/{resume}/language-level-resumes/create', 'App\Http\Controllers\Admin\LanguageLevelResumesController@create');
+Route::post('/resume/language-level-resumes', 'App\Http\Controllers\Admin\LanguageLevelResumesController@store');
+
+//Resume Disability
+Route::get('/resume/{resume}/disability-resumes/create', 'App\Http\Controllers\Admin\DisabilityResumesController@create');
+Route::post('/resume/disability-resumes', 'App\Http\Controllers\Admin\DisabilityResumesController@store');
 
 //Resume Work Experience
 Route::get('/resume/{resume}/work-experiences/create', 'App\Http\Controllers\Admin\WorkExperienceController@create');
 Route::get('/resume/{id}/identificaciones', 'App\Http\Controllers\Admin\ResumesController@getIdentificaciones')->name('identificaciones');
-Route::post('/resume', 'App\Http\Controllers\Admin\ResumesController@store')->name('store');
+Route::post('/resume/work-experiences', 'App\Http\Controllers\Admin\WorkExperienceController@store');
 
 //Call
 Route::get('/calls', 'App\Http\Controllers\Applicant\HomeController@homeCalls');
 Route::get('/calls/{call}/application', 'App\Http\Controllers\Admin\ApplicationsController@create');
+Route::get('/calls/{call}/show', 'App\Http\Controllers\Admin\CallsController@show');
 Route::get('/calls/{call}/application/{resume}/transitionsave', 'App\Http\Controllers\Admin\ApplicationsController@transition');
 
 //Applications

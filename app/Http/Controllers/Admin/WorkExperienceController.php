@@ -85,7 +85,7 @@ class WorkExperienceController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-
+        $sanitized['end_reason_id'] = $request->getEndReasonId();
         // Store the WorkExperience
         $workExperience = WorkExperience::create($sanitized);
 

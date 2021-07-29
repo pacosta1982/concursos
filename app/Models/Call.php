@@ -3,9 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Brackets\Media\HasMedia\ProcessMediaTrait;
+use Brackets\Media\HasMedia\AutoProcessMediaTrait;
+use Brackets\Media\HasMedia\HasMediaCollectionsTrait;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Brackets\Media\HasMedia\HasMediaThumbsTrait;
 
-class Call extends Model
+class Call extends Model implements HasMedia
 {
+    use ProcessMediaTrait;
+    use AutoProcessMediaTrait;
+    use HasMediaCollectionsTrait;
+    use HasMediaThumbsTrait;
     protected $fillable = [
         'description',
         'call_type_id',
@@ -14,6 +24,7 @@ class Call extends Model
         'start',
         'end',
         'footnote',
+        'vacancies',
     ];
 
 
@@ -27,6 +38,22 @@ class Call extends Model
 
     protected $appends = ['resource_url', 'is_admin'];
     protected $with = ['CallType', 'Position', 'Company'];
+
+    function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('gallery')
+            //->accepts('image/*')
+            ->maxNumberOfFiles(2);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        /*$this->addMediaConversion('detail_hd')
+            ->width(1920)
+            ->height(1080)
+            ->performOnCollections('gallery');*/
+        $this->autoRegisterThumb200();
+    }
 
     /* ************************ ACCESSOR ************************* */
 

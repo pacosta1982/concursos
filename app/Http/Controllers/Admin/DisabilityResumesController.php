@@ -9,6 +9,8 @@ use App\Http\Requests\Admin\DisabilityResume\IndexDisabilityResume;
 use App\Http\Requests\Admin\DisabilityResume\StoreDisabilityResume;
 use App\Http\Requests\Admin\DisabilityResume\UpdateDisabilityResume;
 use App\Models\DisabilityResume;
+use App\Models\Disability;
+use App\Models\Resume;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -29,6 +31,11 @@ class DisabilityResumesController extends Controller
      * @param IndexDisabilityResume $request
      * @return array|Factory|View
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(IndexDisabilityResume $request)
     {
         // create and AdminListing instance for a specific model and
@@ -61,11 +68,11 @@ class DisabilityResumesController extends Controller
      * @throws AuthorizationException
      * @return Factory|View
      */
-    public function create()
+    public function create(Resume $resume)
     {
-        $this->authorize('admin.disability-resume.create');
-
-        return view('admin.disability-resume.create');
+        //$this->authorize('admin.disability-resume.create');
+        $disability = Disability::all();
+        return view('applicant.resume.disability-resume.create', compact('disability', 'resume'));
     }
 
     /**
@@ -78,15 +85,15 @@ class DisabilityResumesController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-
+        $sanitized['disability_id'] = $request->getDisabilityId();
         // Store the DisabilityResume
         $disabilityResume = DisabilityResume::create($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/disability-resumes'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('resume'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/disability-resumes');
+        return redirect('resume');
     }
 
     /**
@@ -171,7 +178,7 @@ class DisabilityResumesController extends Controller
      * @throws Exception
      * @return Response|bool
      */
-    public function bulkDestroy(BulkDestroyDisabilityResume $request) : Response
+    public function bulkDestroy(BulkDestroyDisabilityResume $request): Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])

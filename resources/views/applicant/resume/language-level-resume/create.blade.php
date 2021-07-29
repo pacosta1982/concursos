@@ -10,7 +10,7 @@
                 <div class="card">
 
         <language-level-resume-form
-            :action="'{{ url('admin/language-level-resumes') }}'"
+            :action="'{{ url('/resume/language-level-resumes') }}'"
             :language="{{ $language->toJson() }}"
             :language_level="{{ $language_level->toJson() }}"
             :resume="{{ $resume->id }}"

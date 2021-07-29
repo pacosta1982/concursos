@@ -36,7 +36,7 @@
                                 <thead>
                                     <tr>
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.call.columns.id') }}</th>
+                                        <!--<th is='sortable' :column="'id'">{{ trans('admin.call.columns.id') }}</th> -->
                                         <th is='sortable' :column="'description'">{{ trans('admin.call.columns.description') }}</th>
                                         <th is='sortable' :column="'call_type_id'">{{ trans('admin.call.columns.call_type_id') }}</th>
                                         <th is='sortable' :column="'position_id'">{{ trans('admin.call.columns.position_id') }}</th>
@@ -50,7 +50,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(item, index) in collection" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
-                                        <td>@{{ item.id }}</td>
+                                        <!--<td>@{{ item.id }}</td>-->
                                         <td>@{{ item.description }}</td>
                                         <td>@{{ item.call_type.name }}</td>
                                         <td>@{{ item.position.name }}</td>
@@ -60,7 +60,7 @@
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">
-                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
+                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.is_admin + '/show'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-search"></i></a>
                                                 </div>
                                             </div>
                                         </td>
@@ -78,10 +78,10 @@
                             </div>
 
                             <div class="no-items-found" v-if="!collection.length > 0">
-                                <i class="icon-magnifier"></i>
-                                <h3>{{ trans('brackets/admin-ui::admin.index.no_items') }}</h3>
+                                <!--<i class="icon-magnifier"></i>
+                                <h3>{{ trans('brackets/admin-ui::admin.index.no_items') }}</h3>-->
                                 <p>{{ trans('brackets/admin-ui::admin.index.try_changing_items') }}</p>
-                                <a class="btn btn-primary btn-spinner" href="{{ url('admin/calls/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.call.actions.create') }}</a>
+                                <!--<a class="btn btn-primary btn-spinner" href="{{ url('admin/calls/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.call.actions.create') }}</a>-->
                             </div>
                         </div>
                     </div>

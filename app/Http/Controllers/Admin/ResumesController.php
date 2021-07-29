@@ -19,7 +19,7 @@ use App\Models\EthnicResume;
 use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
@@ -39,15 +39,21 @@ class ResumesController extends Controller
      * @param IndexResume $request
      * @return array|Factory|View
      */
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
     }
+    */
 
     public function index(IndexAcademicTraining $request)
     {
         $resume = Resume::where('created_by', Auth::user()->id)->first();
-        $resumeid = $resume->id;
+        if ($resume) {
+            $resumeid = $resume->id;
+        } else {
+            $resumeid = '0';
+        }
+        //$resumeid = $resume->id;
         //return $resume;
         $data = AdminListing::create(AcademicTraining::class)->processRequestAndGet(
             $request,
@@ -152,8 +158,57 @@ class ResumesController extends Controller
 
     public function getIdentificaciones($id)
     {
-        //return "abc";
-        $client = new Client();
+
+        try {
+            $response = Http::timeout(2)->withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ])->post('http://10.1.79.7:8080/mbohape-core/sii/security', [
+                'username' => 'senavitatconsultas',
+                'password' => 'S3n4vitat',
+            ]);
+            $token = $response['token'];
+
+            try {
+                $ident = Http::timeout(2)->withHeaders([
+                    //'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                    'Authorization' => 'Bearer ' . $token,
+                ])->get('http://10.1.79.7:8080/frontend-identificaciones/api/persona/obtenerPersonaPorCedula/' . $id);
+                return response()->json([
+                    'error' => false,
+                    'message' => $ident['obtenerPersonaPorNroCedulaResponse']['return']
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Error de Lectura de Datos'
+                ]);
+            }
+
+            return $token;
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Error de Autenticación'
+            ]);
+        }
+
+
+
+
+
+        /*$identificaciones = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $token,
+        ])->post('http://10.1.79.7:8080/frontend-identificaciones/api/persona/obtenerPersonaPorCedula/' . $id, [
+            'username' => 'senavitatconsultas',
+            'password' => 'S3n4vitat',
+        ]);
+
+        return $identificaciones;*/
+        /*$client = new Client();
 
         try {
             $url = "http://" . env("URL_ENV", "192.168.202.43:8080") . "/mbohape-core/sii/security";
@@ -207,7 +262,7 @@ class ResumesController extends Controller
                 'error' => true,
                 'message' => 'Error de comunicación'
             ]);
-        }
+        }*/
     }
 
     /**
@@ -220,7 +275,8 @@ class ResumesController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-
+        $sanitized['created_by'] = Auth::user()->id;
+        //dd($sanitized);
         // Store the Resume
         $resume = Resume::create($sanitized);
 

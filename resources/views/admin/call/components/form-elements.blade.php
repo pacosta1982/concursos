@@ -66,6 +66,15 @@
     </div>
 </div>
 
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('vacancies'), 'has-success': fields.vacancies && fields.vacancies.valid }">
+    <label for="vacancies" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.call.columns.vacancies') }}</label>
+        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <input type="text" v-model="form.vacancies" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('vacancies'), 'form-control-success': fields.vacancies && fields.vacancies.valid}" id="vacancies" name="vacancies" placeholder="{{ trans('admin.call.columns.vacancies') }}">
+        <div v-if="errors.has('vacancies')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('vacancies') }}</div>
+    </div>
+</div>
+
+
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('start'), 'has-success': fields.start && fields.start.valid }">
     <label for="start" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.call.columns.start') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
@@ -100,5 +109,10 @@
     </div>
 
 </div>
+
+
+
+
+
 
 

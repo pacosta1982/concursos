@@ -33,6 +33,7 @@ class StoreCall extends FormRequest
             'start' => ['required', 'date'],
             'end' => ['required', 'date'],
             'footnote' => ['required'],
+            'vacancies' => ['required'],
 
         ];
     }

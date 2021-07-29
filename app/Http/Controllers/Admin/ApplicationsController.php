@@ -33,11 +33,21 @@ class ApplicationsController extends Controller
      * @param IndexApplication $request
      * @return array|Factory|View
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(IndexApplication $request)
     {
         // create and AdminListing instance for a specific model and
         $resume = Resume::where('created_by', Auth::user()->id)->first();
-        $authID = $resume->id;
+        if ($resume) {
+            $authID = $resume->id;
+        } else {
+            $authID = '0';
+        }
+
         //$authID = Auth::user()->id;
         $data = AdminListing::create(Application::class)->processRequestAndGet(
             // pass the request with params

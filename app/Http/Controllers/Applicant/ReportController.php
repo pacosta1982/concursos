@@ -52,7 +52,11 @@ class ReportController extends Controller
 
         $call = Call::all();
         $resume = Resume::where('created_by', Auth::user()->id)->first();
-        $authID = $resume->id;
+        if ($resume) {
+            $authID = $resume->id;
+        } else {
+            $authID = '0';
+        }
 
         $app = Application::where('resume_id', $authID)->get();
 

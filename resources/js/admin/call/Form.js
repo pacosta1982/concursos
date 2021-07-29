@@ -13,8 +13,10 @@ Vue.component('call-form', {
                 start: '',
                 end: '',
                 footnote: '',
+                vacancies: '',
 
-            }
+            },
+            mediaCollections: ['gallery']
         }
     }
 

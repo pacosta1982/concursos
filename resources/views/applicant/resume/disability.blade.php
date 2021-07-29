@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> {{ trans('admin.disability-resume.actions.index') }} - Opcional
-                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/disability-resumes/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.disability-resume.actions.create') }}</a>
+                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('resume/'.$resume->id.'/disability-resumes/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.disability-resume.actions.create') }}</a>
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">

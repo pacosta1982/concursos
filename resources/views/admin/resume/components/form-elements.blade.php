@@ -2,7 +2,7 @@
     <div class="form-group col-sm-4">
         <label for="government_id" >{{ trans('admin.resume.columns.government_id') }}</label>
         <div class="input-group mb-3">
-        <input @change="findData" type="text" value="3496101" v-model="form.government_id" v-validate="''" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('government_id'), 'form-control-success': fields.government_id && fields.government_id.valid}" id="government_id" name="government_id" placeholder="{{ trans('admin.resume.columns.government_id') }}">
+        <input @change="findData" type="text" v-model="form.government_id" v-validate="''" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('government_id'), 'form-control-success': fields.government_id && fields.government_id.valid}" id="government_id" name="government_id" placeholder="{{ trans('admin.resume.columns.government_id') }}">
         <div v-if="errors.has('government_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('government_id') }}</div>
         <div class="input-group-append">
             <button @click="findData" class="btn btn-primary" type="button"><i class="fa fa-random" aria-hidden="true"></i></button>
@@ -38,7 +38,8 @@
         <label for="birthdate">{{ trans('admin.resume.columns.birthdate') }}</label>
         <div class="input-group input-group--custom">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <datetime
+            <input type="text" readonly v-model="form.birthdate" v-validate="''" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('birthdate'), 'form-control-success': fields.birthdate && fields.birthdate.valid}" id="birthdate" name="birthdate" placeholder="{{ trans('admin.resume.columns.birthdate') }}">
+            <!--<datetime
 
             v-model="form.birthdate"
             :config="datePickerConfig"
@@ -46,7 +47,7 @@
             :class="{'form-control-danger': errors.has('birthdate'), 'form-control-success': fields.birthdate && fields.birthdate.valid}"
             id="birthdate" name="birthdate"
             placeholder="{{ trans('brackets/admin-ui::admin.forms.select_date_and_time') }}">
-        </datetime>
+        </datetime>-->
         </div>
         <div v-if="errors.has('birthdate')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('birthdate') }}</div>
     </div>

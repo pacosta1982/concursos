@@ -110,8 +110,10 @@ class CallsController extends Controller
      */
     public function show(Call $call)
     {
-        $this->authorize('admin.call.show', $call);
-
+        //$this->authorize('admin.call.show', $call);
+        //return $call;
+        //return $mediaItems = $call->getMedia('gallery');
+        return view('applicant.calls.show', compact('call'));
         // TODO your code goes here
     }
 

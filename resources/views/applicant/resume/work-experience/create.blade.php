@@ -9,7 +9,7 @@
                 <div class="card">
 
         <work-experience-form
-            :action="'{{ url('admin/work-experiences') }}'"
+            :action="'{{ url('resume/work-experiences') }}'"
             :end_reason="{{ $end_reason->toJson() }}"
             :resume="{{ $resume->id }}"
             v-cloak

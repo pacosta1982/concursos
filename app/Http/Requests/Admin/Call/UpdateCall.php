@@ -33,6 +33,7 @@ class UpdateCall extends FormRequest
             'start' => ['sometimes', 'date'],
             'end' => ['sometimes', 'date'],
             'footnote' => ['required'],
+            'vacancies' => ['required'],
 
         ];
     }

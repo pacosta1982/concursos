@@ -1,15 +1,27 @@
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('resume_id'), 'has-success': fields.resume_id && fields.resume_id.valid }">
+<!--<div class="form-group row align-items-center" :class="{'has-danger': errors.has('resume_id'), 'has-success': fields.resume_id && fields.resume_id.valid }">
     <label for="resume_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.disability-resume.columns.resume_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.resume_id" v-validate="'required|integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('resume_id'), 'form-control-success': fields.resume_id && fields.resume_id.valid}" id="resume_id" name="resume_id" placeholder="{{ trans('admin.disability-resume.columns.resume_id') }}">
         <div v-if="errors.has('resume_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('resume_id') }}</div>
     </div>
-</div>
+</div>-->
 
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('disability_id'), 'has-success': fields.disability_id && fields.disability_id.valid }">
     <label for="disability_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.disability-resume.columns.disability_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.disability_id" v-validate="'required|integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('disability_id'), 'form-control-success': fields.disability_id && fields.disability_id.valid}" id="disability_id" name="disability_id" placeholder="{{ trans('admin.disability-resume.columns.disability_id') }}">
+        <!--<input type="text" v-model="form.disability_id" v-validate="'required|integer'" @input="validate($event)"
+        class="form-control" :class="{'form-control-danger': errors.has('disability_id'), 'form-control-success': fields.disability_id && fields.disability_id.valid}"
+        id="disability_id" name="disability_id" placeholder="{{ trans('admin.disability-resume.columns.disability_id') }}">-->
+        <multiselect
+            v-model="form.disability"
+            :options="disability"
+            :multiple="false"
+            track-by="id"
+            label="name"
+            :taggable="true"
+            tag-placeholder=""
+            placeholder="{{ trans('admin.academic-training.columns.disability_id') }}">
+        </multiselect>
         <div v-if="errors.has('disability_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('disability_id') }}</div>
     </div>
 </div>

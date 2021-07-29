@@ -36,6 +36,8 @@ class StoreResume extends FormRequest
             'neighborhood' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email', 'string'],
+            'created_by' => ['sometimes'],
+
 
         ];
     }

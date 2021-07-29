@@ -24,6 +24,11 @@
 
                 <div class="card-body">
                     @include('admin.call.components.form-elements')
+                    @include('brackets/admin-ui::admin.includes.media-uploader', [
+                            'mediaCollection' => app(App\Models\Call::class)->getMediaCollection('gallery'),
+                            //'media' => $call->getThumbs200ForCollection('gallery'),
+                            'label' => 'Documentos Adjuntos'
+                        ])
                 </div>
 
                 <div class="card-footer">

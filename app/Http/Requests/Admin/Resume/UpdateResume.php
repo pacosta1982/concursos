@@ -36,6 +36,7 @@ class UpdateResume extends FormRequest
             'neighborhood' => ['sometimes', 'string'],
             'phone' => ['sometimes', 'string'],
             'email' => ['sometimes', 'email', 'string'],
+            'created_by' => ['sometimes'],
 
         ];
     }
