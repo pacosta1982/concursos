@@ -34,6 +34,8 @@ class StoreResume extends FormRequest
             'nationality' => ['required', 'string'],
             'address' => ['required', 'string'],
             'neighborhood' => ['required', 'string'],
+            'state' => ['required'],
+            'city' => ['required'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email', 'string'],
             'created_by' => ['sometimes'],
@@ -54,5 +56,21 @@ class StoreResume extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    public function getStateId()
+    {
+        if ($this->has('state')) {
+            return $this->get('state')['DptoId'];
+        }
+        return null;
+    }
+
+    public function getCityId()
+    {
+        if ($this->has('city')) {
+            return $this->get('city')['CiuId'];
+        }
+        return null;
     }
 }

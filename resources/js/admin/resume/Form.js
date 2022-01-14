@@ -2,7 +2,7 @@ import AppForm from '../app-components/Form/AppForm';
 
 Vue.component('resume-form', {
     mixins: [AppForm],
-    props: ['finddataurl'],
+    props: ['finddataurl','state','city'],
     data: function () {
         return {
             form: {
@@ -13,12 +13,15 @@ Vue.component('resume-form', {
                 gender: '',
                 nationality: '',
                 address: '',
+                state: '',
+                city: '',
                 neighborhood: '',
                 phone: '',
                 email: '',
                 created_by: '',
 
             },
+            cities: [],
             datePickerConfig: {
                 dateFormat: 'yyyy-MM-dd',
                 altFormat: 'd-m-Y',
@@ -27,6 +30,21 @@ Vue.component('resume-form', {
         }
     },
     methods: {
+        onchangeDpto: function (selectedItems) {
+
+            axios
+                .get('/resume/' + selectedItems.DptoId + '/cities')
+                .then(response => {
+                    console.log(response.data)
+                    this.form.city = ''
+                    this.cities = response.data
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            //console.log(selectedItems.DptoId)
+        },
         findData: function () {
 
             //console.log(this.form.government_id)

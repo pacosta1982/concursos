@@ -316,6 +316,8 @@ Route::get('/home', 'App\Http\Controllers\Applicant\HomeController@index');
 //Resume
 Route::get('/resume', 'App\Http\Controllers\Admin\ResumesController@index');
 Route::get('/resume/create', 'App\Http\Controllers\Admin\ResumesController@create');
+Route::post('/resume', 'App\Http\Controllers\Admin\ResumesController@store');
+Route::get('resume/{state_id}/cities', 'App\Http\Controllers\Admin\ResumesController@cities')->name('cities');
 Route::get('/resume/{resume}/edit', 'App\Http\Controllers\Admin\ResumesController@edit');
 Route::post('/resume/{resume}/update', 'App\Http\Controllers\Admin\ResumesController@update')->name('update');
 

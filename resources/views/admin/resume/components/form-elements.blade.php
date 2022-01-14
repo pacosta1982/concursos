@@ -54,6 +54,50 @@
 </div>
 
 <div class="row">
+    <div class="form-group col-sm-6">
+        <label for="state_id">{{ trans('admin.resume.columns.state') }}</label>
+        <div >
+            <multiselect
+            v-model="form.state"
+            :options="state"
+            :multiple="false"
+            track-by="DptoId"
+            label="DptoNom"
+            :taggable="true"
+            tag-placeholder=""
+            @select="onchangeDpto"
+            placeholder="{{ trans('admin.applications.columns.state') }}">
+            </multiselect>
+        <!--<input type="text" v-model="form.state_id" v-validate="'required'" @input="validate($event)"
+        class="form-control" :class="{'form-control-danger': errors.has('state_id'), 'form-control-success': fields.state_id && fields.state_id.valid}"
+        id="state_id" name="state_id" placeholder="{{ trans('admin.task.columns.state_id') }}">-->
+        <div v-if="errors.has('state_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('state_id') }}</div>
+    </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label for="city_id">{{ trans('admin.resume.columns.city') }}</label>
+        <div >
+            <multiselect
+            v-model="form.city"
+            :options="cities"
+            :multiple="false"
+            track-by="CiuId"
+            label="CiuNom"
+            :taggable="true"
+            tag-placeholder=""
+            placeholder="{{ trans('admin.applications.columns.city') }}">
+        </multiselect>
+        <!--<input type="text" v-model="form.city_id" v-validate="'required'" @input="validate($event)"
+        class="form-control" :class="{'form-control-danger': errors.has('city_id'), 'form-control-success': fields.city_id && fields.city_id.valid}"
+        id="city_id" name="city_id" placeholder="{{ trans('admin.task.columns.city_id') }}">-->
+        <div v-if="errors.has('city_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('city_id') }}</div>
+    </div>
+    </div>
+</div>
+
+
+
+<div class="row">
     <div class="form-group col-sm-3">
         <label for="address" >{{ trans('admin.resume.columns.address') }}</label>
         <input type="text" onkeyup="javascript:this.value=this.value.toUpperCase();" v-model="form.address" v-validate="''" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('address'), 'form-control-success': fields.address && fields.address.valid}" id="address" name="address" placeholder="{{ trans('admin.resume.columns.address') }}">

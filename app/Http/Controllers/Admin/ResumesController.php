@@ -12,10 +12,12 @@ use App\Http\Requests\Admin\AcademicTraining\DestroyAcademicTraining;
 use App\Http\Requests\Admin\AcademicTraining\IndexAcademicTraining;
 use App\Models\Resume;
 use App\Models\AcademicTraining;
+use App\Models\City;
 use App\Models\LanguageLevelResume;
 use App\Models\WorkExperience;
 use App\Models\DisabilityResume;
 use App\Models\EthnicResume;
+use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -152,8 +154,24 @@ class ResumesController extends Controller
     public function create()
     {
         //$this->authorize('admin.resume.create');
+        $nodep = [18, 19, 20, 999];
+        $state = State::whereNotIn('DptoId', $nodep)->orderBy('DptoNom')->get();
+        $city = City::all();
 
-        return view('applicant.resume.create');
+        return view('applicant.resume.create', compact('state', 'city'));
+    }
+
+    public function cities($dptoid)
+    {
+        //$nodep = [18, 19, 20, 999];
+        //$state = State::whereNotIn('DptoId', $nodep)->orderBy('DptoNom')->get();
+        //return $state;
+        $city = City::where('CiuDptoID', $dptoid)
+            ->whereNotIn('CiuId', [998, 999])
+            ->get(); //->sortBy("CiuNom"); //->pluck("CiuNom", "CiuId");
+        return $city;
+        //return json_encode($city, JSON_FORCE_OBJECT);
+        //return json_encode($city, JSON_UNESCAPED_UNICODE);
     }
 
     public function getIdentificaciones($id)
@@ -275,6 +293,8 @@ class ResumesController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        $sanitized['state_id'] = $request->getStateId();
+        $sanitized['city_id'] = $request->getCityId();
         $sanitized['created_by'] = Auth::user()->id;
         //dd($sanitized);
         // Store the Resume
@@ -313,8 +333,14 @@ class ResumesController extends Controller
         //$this->authorize('admin.resume.edit', $resume);
         //dd($resume);
 
+        $nodep = [18, 19, 20, 999];
+        $state = State::whereNotIn('DptoId', $nodep)->orderBy('DptoNom')->get();
+        $city = City::all();
+
         return view('applicant.resume.edit', [
             'resume' => $resume,
+            'state' => $state,
+            'city' => $city
         ]);
     }
 
@@ -329,6 +355,8 @@ class ResumesController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        $sanitized['state_id'] = $request->getStateId();
+        $sanitized['city_id'] = $request->getCityId();
 
         // Update changed values Resume
         $resume->update($sanitized);

@@ -55,4 +55,20 @@ class UpdateResume extends FormRequest
 
         return $sanitized;
     }
+
+    public function getStateId()
+    {
+        if ($this->has('state')) {
+            return $this->get('state')['DptoId'];
+        }
+        return null;
+    }
+
+    public function getCityId()
+    {
+        if ($this->has('city')) {
+            return $this->get('city')['CiuId'];
+        }
+        return null;
+    }
 }

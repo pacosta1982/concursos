@@ -11,6 +11,8 @@
         <resume-form
             :action="'{{ url('resume/'.$resume->id.'/update') }}'"
             :data="{{ $resume->toJson() }}"
+            :state="{{ $state->toJson() }}"
+            :city="{{ $city->toJson() }}"
             :finddataurl = "'{{ url('resume') }}'"
             v-cloak
             inline-template>
