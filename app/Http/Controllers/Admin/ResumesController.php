@@ -158,12 +158,12 @@ class ResumesController extends Controller
 
     public function getIdentificaciones($id)
     {
-
+        //$url = "http://" . env("URL_ENV", "192.168.202.43:8080") . "/mbohape-core/sii/security";
         try {
             $response = Http::timeout(2)->withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json'
-            ])->post('http://10.1.79.7:8080/mbohape-core/sii/security', [
+            ])->post("http://". env("URL_ENV", "192.168.202.43:8080") ."/mbohape-core/sii/security", [
                 'username' => 'senavitatconsultas',
                 'password' => 'S3n4vitat',
             ]);
@@ -174,7 +174,7 @@ class ResumesController extends Controller
                     //'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
                     'Authorization' => 'Bearer ' . $token,
-                ])->get('http://10.1.79.7:8080/frontend-identificaciones/api/persona/obtenerPersonaPorCedula/' . $id);
+                ])->get("http://" . env("URL_ENV", "192.168.202.43:8080") . "/frontend-identificaciones/api/persona/obtenerPersonaPorCedula/" . $id);
                 return response()->json([
                     'error' => false,
                     'message' => $ident['obtenerPersonaPorNroCedulaResponse']['return']

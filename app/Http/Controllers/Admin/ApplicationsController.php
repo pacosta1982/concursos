@@ -103,16 +103,45 @@ class ApplicationsController extends Controller
             ->where('resume_id', $resume->id)->exists();
         //dd($app);
         //->first();
+        //return $call->position->acronym;
+
+        //$number = 9879;
+
+
+        //return $string;
 
         if (!$app) {
             # code...
             $application = new Application;
+            //$application->getNextId();
 
-            $application->code = 'ABC';
+            //return "hola";
+            $application->code = 'test';
             $application->call_id = $call->id;
             $application->resume_id = $resume->id;
             $application->data = $resume->toJson();
             $application->save();
+
+            $number = $application->id;
+            $length = 4;
+            $string = substr(str_repeat(0, $length).$number, - $length);
+
+            $flight = Application::find($application->id);
+
+            $flight->code = $call->position->acronym.$string;
+
+            $flight->save();
+            /*$resumejson = $resume;
+            //  return $resumejson;
+
+            $application = Application::firstOrNew(
+                [
+                    'call_id' => $call->id,
+                    'resume_id' => $resume->id,
+                    'data' => $resumejson,
+                ]);
+            $application->code = $call->position->acronym.'-'.$application->id;
+            $application->save();*/
 
             $status = new ApplicationStatus;
 

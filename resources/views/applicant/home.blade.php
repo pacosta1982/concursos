@@ -22,9 +22,9 @@
                 <a href="/resume" type="button" class="btn btn-square btn-success btn-lg btn-block">{{ trans('admin.applicant.resume') }}</a>
             </div>
 
-            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+            <!--<div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
                 <a href="/reports" type="button" class="btn btn-square btn-danger btn-lg btn-block">{{ trans('admin.applicant.reports') }}</a>
-            </div>
+            </div>-->
         </div>
 
     </div>
