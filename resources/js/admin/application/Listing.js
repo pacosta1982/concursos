@@ -13,8 +13,8 @@ Vue.component('application-listing', {
             if (this.status == 'success') {
                 this.$notify({ type: 'success', title: 'Exito!', text: 'Se ha Postulado Correctamente.' });
             }
-            if (this.status == 'error') {
-                //this.$notify({ type: 'error', title: 'Error!', text: 'Ya se ha Postulado para esta convocatoria.' });
+            if (this.status == 'update') {
+                this.$notify({ type: 'success', title: 'Exito!', text: 'La Postulacion se ha actualizado correctamente' });
             }
         }
     }

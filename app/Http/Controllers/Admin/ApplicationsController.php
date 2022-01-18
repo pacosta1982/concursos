@@ -151,9 +151,18 @@ class ApplicationsController extends Controller
             $status->user_model = 'App\Models\User';
 
             $status->save();
-            return redirect('applications')->with('status', 'success');;
+            return redirect('applications')->with('status', 'success');
         } else {
-            return redirect('calls')->with('status', 'error');
+
+            $aux = Application::where('call_id', $call->id)
+            ->where('resume_id', $resume->id)->first();
+            //return $aux->id;
+            $flight = Application::find($aux->id);
+            $flight->data = $resume->toJson();
+            $flight->save();
+
+            return redirect('applications')->with('status', 'update');
+            //return redirect('calls')->with('status', 'error');
             # code...
             //return redirect('calls')->withErrors('message', 'Selected query is deleted successfully.');
             //if ($request->ajax()) {
