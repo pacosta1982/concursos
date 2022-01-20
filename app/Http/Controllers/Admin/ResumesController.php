@@ -68,6 +68,8 @@ class ResumesController extends Controller
             }
         );
 
+
+
         $datawork = AdminListing::create(WorkExperience::class)->processRequestAndGet(
             // pass the request with params
             $request,
@@ -83,6 +85,9 @@ class ResumesController extends Controller
                 //->orderBy('requirements.requirement_type_id');
             }
         );
+
+
+
 
 
         $datalanguage = AdminListing::create(LanguageLevelResume::class)->processRequestAndGet(
@@ -106,6 +111,12 @@ class ResumesController extends Controller
                 //->orderBy('requirements.requirement_type_id');
             }
         );
+
+        if ($request->ajax()) {
+            return [
+                'data' => $data,
+                ];
+        }
 
         $ethnic = AdminListing::create(EthnicResume::class)->processRequestAndGet(
             $request,

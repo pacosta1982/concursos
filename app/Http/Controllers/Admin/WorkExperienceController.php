@@ -21,6 +21,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class WorkExperienceController extends Controller
 {
@@ -38,28 +39,35 @@ class WorkExperienceController extends Controller
 
     public function index(IndexWorkExperience $request)
     {
+
+        $resume = Resume::where('created_by', Auth::user()->id)->first();
+        if ($resume) {
+            $resumeid = $resume->id;
+        } else {
+            $resumeid = '0';
+        }
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(WorkExperience::class)->processRequestAndGet(
+        $datawork = AdminListing::create(WorkExperience::class)->processRequestAndGet(
             // pass the request with params
             $request,
 
             // set columns to query
-            ['id', 'resume_id', 'company', 'position', 'start', 'end', 'end_reason_id'],
+            ['id', 'resume_id', 'company', 'position', 'start', 'end', 'end_reason_id', 'tasks', 'contact'],
 
             // set columns to searchIn
-            ['id', 'company', 'position', 'tasks', 'contact']
+            ['id', 'company', 'position', 'tasks', 'contact'],
+            function ($query) use ($resumeid) {
+                $query
+                    ->where('work_experience.resume_id', '=', $resumeid);
+                //->orderBy('requirements.requirement_type_id');
+            }
         );
 
         if ($request->ajax()) {
-            if ($request->has('bulk')) {
-                return [
-                    'bulkItems' => $data->pluck('id')
-                ];
-            }
-            return ['data' => $data];
+            return ['datawork' => $datawork];
         }
 
-        return view('admin.work-experience.index', ['data' => $data]);
+        //return view('admin.work-experience.index', ['datawork' => $datawork]);
     }
 
     /**

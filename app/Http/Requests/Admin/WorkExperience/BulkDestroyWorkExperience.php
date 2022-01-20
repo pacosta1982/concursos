@@ -12,10 +12,10 @@ class BulkDestroyWorkExperience extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.work-experience.bulk-delete');
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the request.

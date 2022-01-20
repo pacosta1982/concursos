@@ -12,10 +12,10 @@ class DestroyDisabilityResume extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.disability-resume.delete', $this->disabilityResume);
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the request.

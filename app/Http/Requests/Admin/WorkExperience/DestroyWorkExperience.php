@@ -12,10 +12,10 @@ class DestroyWorkExperience extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.work-experience.delete', $this->workExperience);
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the request.
