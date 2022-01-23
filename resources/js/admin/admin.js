@@ -13,6 +13,7 @@ import VModal from 'vue-js-modal'
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import Vue from 'vue';
+import VueCookies from 'vue-cookies';
 
 import './app-components/bootstrap';
 import './index';
@@ -29,6 +30,7 @@ Vue.use(VModal, { dialog: true, dynamic: true, injectModalsContainer: true });
 Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 Vue.use(VueCookie);
+Vue.use(VueCookies);
 
 Vue.use(Loading, {
     isFullPage: true,
