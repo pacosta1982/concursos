@@ -62,6 +62,14 @@
     </div>
 </div>
 
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('workload'), 'has-success': fields.workload && fields.workload.valid }">
+    <label for="workload" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.academic-training.columns.workloadlabel') }}</label>
+        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <input type="text" v-model="form.workload"  @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('workload'), 'form-control-success': fields.workload && fields.workload.valid}" id="workload" name="workload" placeholder="{{ trans('admin.academic-training.columns.workloadlabel') }}">
+        <div v-if="errors.has('workload')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('workload') }}</div>
+    </div>
+</div>
+
 <div class="form-check row" :class="{'has-danger': errors.has('registered'), 'has-success': fields.registered && fields.registered.valid }">
     <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
         <input class="form-check-input" id="registered" type="checkbox" v-model="form.registered" v-validate="''" data-vv-name="registered"  name="registered_fake_element">

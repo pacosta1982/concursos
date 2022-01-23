@@ -12,6 +12,7 @@ Vue.component('academic-training-form', {
                 name: '',
                 institution: '',
                 registered: false,
+                workload: '',
 
             }
         }

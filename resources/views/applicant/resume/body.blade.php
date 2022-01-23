@@ -37,11 +37,12 @@
                                 <thead>
                                     <tr>
 
-                                        <th is='sortable' :column="'education_level_id'">{{ trans('admin.academic-training.columns.education_level_id') }}</th>
-                                        <th is='sortable' :column="'academic_state_id'">{{ trans('admin.academic-training.columns.academic_state_id') }}</th>
-                                        <th is='sortable' :column="'name'">{{ trans('admin.academic-training.columns.name') }}</th>
-                                        <th is='sortable' :column="'institution'">{{ trans('admin.academic-training.columns.institution') }}</th>
-                                        <th is='sortable' :column="'registered'">{{ trans('admin.academic-training.columns.registered') }}</th>
+                                        <th >{{ trans('admin.academic-training.columns.education_level_id') }}</th>
+                                        <th >{{ trans('admin.academic-training.columns.academic_state_id') }}</th>
+                                        <th >{{ trans('admin.academic-training.columns.name') }}</th>
+                                        <th >{{ trans('admin.academic-training.columns.institution') }}</th>
+                                        <th class="text-center">{{ trans('admin.academic-training.columns.workload') }}</th>
+                                        <th >{{ trans('admin.academic-training.columns.registered') }}</th>
 
                                         <th></th>
                                     </tr>
@@ -54,6 +55,7 @@
                                         <td>@{{ item.academic_state.name }}</td>
                                         <td>@{{ item.name }}</td>
                                         <td>@{{ item.institution }}</td>
+                                        <td class="text-center">@{{ item.workload }}</td>
                                         <td>@{{ item.registered }}</td>
 
                                         <td>

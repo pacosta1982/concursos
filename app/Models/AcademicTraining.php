@@ -15,6 +15,7 @@ class AcademicTraining extends Model
         'name',
         'institution',
         'registered',
+        'workload'
 
     ];
 

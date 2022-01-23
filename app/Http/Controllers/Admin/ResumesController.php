@@ -59,7 +59,7 @@ class ResumesController extends Controller
         //return $resume;
         $data = AdminListing::create(AcademicTraining::class)->processRequestAndGet(
             $request,
-            ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered'],
+            ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered','workload'],
             ['id', 'name', 'institution'],
             function ($query) use ($resumeid) {
                 $query

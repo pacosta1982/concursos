@@ -33,6 +33,7 @@ class StoreAcademicTraining extends FormRequest
             'name' => ['required', 'string'],
             'institution' => ['required', 'string'],
             'registered' => ['required', 'boolean'],
+            'workload' => ['sometimes']
 
         ];
     }

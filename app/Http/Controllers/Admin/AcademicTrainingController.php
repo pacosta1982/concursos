@@ -45,7 +45,7 @@ class AcademicTrainingController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered'],
+            ['id', 'resume_id', 'education_level_id', 'academic_state_id', 'name', 'institution', 'registered','workload'],
 
             // set columns to searchIn
             ['id', 'name', 'institution']
