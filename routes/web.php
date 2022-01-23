@@ -127,6 +127,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
         Route::prefix('calls')->name('calls/')->group(static function () {
             Route::get('/',                                             'CallsController@index')->name('index');
+            Route::get('/{calls}/showadmin',                            'LlamadosController@show');
             Route::get('/create',                                       'CallsController@create')->name('create');
             Route::post('/',                                            'CallsController@store')->name('store');
             Route::get('/{call}/edit',                                  'CallsController@edit')->name('edit');
@@ -371,6 +372,23 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/{resume}',                                    'ResumesController@update')->name('update');
             Route::get('/{id}/hadbenefit',                              'ResumesController@hadBenefit')->name('hadbenefit');
             Route::delete('/{resume}',                                  'ResumesController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
+        Route::prefix('llamados')->name('resumes/')->group(static function () {
+            Route::get('/',                                             'LlamadosController@index')->name('index');
+            //Route::get('/{calls}/showadmin',                            'LlamadosController@show');
+            /*Route::get('/create',                                       'ResumesController@create')->name('create');
+            Route::post('/',                                            'ResumesController@store')->name('store');
+            Route::get('/{resume}/edit',                                'ResumesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ResumesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{resume}',                                    'ResumesController@update')->name('update');
+            Route::get('/{id}/hadbenefit',                              'ResumesController@hadBenefit')->name('hadbenefit');
+            Route::delete('/{resume}',                                  'ResumesController@destroy')->name('destroy');*/
         });
     });
 });

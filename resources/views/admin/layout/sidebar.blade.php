@@ -1,6 +1,8 @@
 <div class="sidebar">
     <nav class="sidebar-nav">
         <ul class="nav">
+            <li class="nav-title">Resumen</li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('admin/llamados') }}"><i class="nav-icon icon-plane"></i> Resumen LLamados</a></li>
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.content') }}</li>
             <li class="nav-item"><a class="nav-link" href="{{ url('admin/contact-methods') }}"><i class="nav-icon icon-compass"></i> {{ trans('admin.contact-method.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/disabilities') }}"><i class="nav-icon icon-umbrella"></i> {{ trans('admin.disability.title') }}</a></li>
