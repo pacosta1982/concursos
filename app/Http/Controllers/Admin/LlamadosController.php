@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Http\Requests\Admin\Call\IndexCall;
 use App\Models\Application;
+use App\Models\Status;
 use PDF;
 
 class LlamadosController extends Controller
@@ -348,6 +349,45 @@ class LlamadosController extends Controller
         return redirect('resume');
     }
 
+
+    public function show(Call $call)
+    {
+        //return $call;
+
+        $aux = Application::find(33);
+        //return $aux;
+
+        $postulantes = Application//::select( 'code', 'call_id', 'resume_id', 'resumes.names', 'resumes.last_names', 'resumes.government_id', 'resumes.email', 'resumes.birthdate')
+                                    //::join('resumes', 'applications.resume_id', '=', 'resumes.id')
+                                    ::where('call_id', $call->id)
+                                    ->get();
+
+                                    //$postulantes = Application::all();
+
+        //return $postulantes;
+
+        return view('admin.call.show', compact('postulantes', 'call'));
+    }
+
+    public function showpostulante(Call $call, Resume $resume)
+    {
+
+        $navegacion = Status::where('id','!=', 1 )->get();
+        return view('admin.call.showpostulante', compact('resume', 'call','navegacion'));
+    }
+
+    public function transition(Call $call, Resume $resume, Status $status)
+    {
+        //return $resume->id;
+        $user = Auth::user()->id;
+        $application = Application::where('call_id',$call->id)
+                                    ->where('resume_id',$resume->id)
+                                    ->first();
+        $appid =  $application->id;
+        //return $appid;
+        return view('admin.call.transition', compact('user','resume','status','appid'));
+    }
+
     /**
      * Display the specified resource.
      *
@@ -355,7 +395,7 @@ class LlamadosController extends Controller
      * @throws AuthorizationException
      * @return void
      */
-    public function show(Call $call)
+    public function showold(Call $call)
     {
         //$this->authorize('admin.resume.show', $resume);
 

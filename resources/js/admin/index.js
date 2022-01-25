@@ -27,3 +27,4 @@ import './status';
 import './call-status';
 import './disability-resume';
 import './ethnic-resume';
+import './state';

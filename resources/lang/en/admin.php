@@ -652,5 +652,22 @@ return [
         ],
     ],
 
+    'state' => [
+        'title' => 'States',
+
+        'actions' => [
+            'index' => 'States',
+            'create' => 'New State',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'color' => 'Color',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

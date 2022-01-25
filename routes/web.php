@@ -127,7 +127,9 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function () {
         Route::prefix('calls')->name('calls/')->group(static function () {
             Route::get('/',                                             'CallsController@index')->name('index');
-            Route::get('/{calls}/showadmin',                            'LlamadosController@show');
+            Route::get('/{call}/showadmin',                            'LlamadosController@show');
+            Route::get('/{call}/showpostulante/{resume}',               'LlamadosController@showpostulante');
+            Route::get('/{call}/transition/{resume}/{status}',           'LlamadosController@transition');
             Route::get('/create',                                       'CallsController@create')->name('create');
             Route::post('/',                                            'CallsController@store')->name('store');
             Route::get('/{call}/edit',                                  'CallsController@edit')->name('edit');
@@ -575,6 +577,22 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'EthnicResumesController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{ethnicResume}',                              'EthnicResumesController@update')->name('update');
             Route::delete('/{ethnicResume}',                            'EthnicResumesController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('states')->name('states/')->group(static function() {
+            Route::get('/',                                             'StatesController@index')->name('index');
+            Route::get('/create',                                       'StatesController@create')->name('create');
+            Route::post('/',                                            'StatesController@store')->name('store');
+            Route::get('/{state}/edit',                                 'StatesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'StatesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{state}',                                     'StatesController@update')->name('update');
+            Route::delete('/{state}',                                   'StatesController@destroy')->name('destroy');
         });
     });
 });

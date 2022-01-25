@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ApplicationStatus\BulkDestroyApplicationStatus;
-use App\Http\Requests\Admin\ApplicationStatus\DestroyApplicationStatus;
-use App\Http\Requests\Admin\ApplicationStatus\IndexApplicationStatus;
-use App\Http\Requests\Admin\ApplicationStatus\StoreApplicationStatus;
-use App\Http\Requests\Admin\ApplicationStatus\UpdateApplicationStatus;
-use App\Models\Application;
-use App\Models\ApplicationStatus;
+use App\Http\Requests\Admin\State\BulkDestroyState;
+use App\Http\Requests\Admin\State\DestroyState;
+use App\Http\Requests\Admin\State\IndexState;
+use App\Http\Requests\Admin\State\StoreState;
+use App\Http\Requests\Admin\State\UpdateState;
+use App\Models\State;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -21,27 +20,27 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
-class ApplicationStatusesController extends Controller
+class StatesController extends Controller
 {
 
     /**
      * Display a listing of the resource.
      *
-     * @param IndexApplicationStatus $request
+     * @param IndexState $request
      * @return array|Factory|View
      */
-    public function index(IndexApplicationStatus $request)
+    public function index(IndexState $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(ApplicationStatus::class)->processRequestAndGet(
+        $data = AdminListing::create(State::class)->processRequestAndGet(
             // pass the request with params
             $request,
 
             // set columns to query
-            ['id', 'application_id', 'status_id', 'user', 'user_model', 'description'],
+            ['id', 'name', 'color'],
 
             // set columns to searchIn
-            ['id', 'user', 'user_model', 'description']
+            ['id', 'name', 'color']
         );
 
         if ($request->ajax()) {
@@ -53,7 +52,7 @@ class ApplicationStatusesController extends Controller
             return ['data' => $data];
         }
 
-        return view('admin.application-status.index', ['data' => $data]);
+        return view('admin.state.index', ['data' => $data]);
     }
 
     /**
@@ -64,44 +63,42 @@ class ApplicationStatusesController extends Controller
      */
     public function create()
     {
-        $this->authorize('admin.application-status.create');
+        $this->authorize('admin.state.create');
 
-        return view('admin.application-status.create');
+        return view('admin.state.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreApplicationStatus $request
+     * @param StoreState $request
      * @return array|RedirectResponse|Redirector
      */
-    public function store(StoreApplicationStatus $request)
+    public function store(StoreState $request)
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-        $aux = Application::find($sanitized['application_id']);
-        //return $aux->call_id;
 
-        // Store the ApplicationStatus
-        $applicationStatus = ApplicationStatus::create($sanitized);
+        // Store the State
+        $state = State::create($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/calls/'.$aux->call_id.'/showadmin'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('admin/states'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/application-statuses');
+        return redirect('admin/states');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param ApplicationStatus $applicationStatus
+     * @param State $state
      * @throws AuthorizationException
      * @return void
      */
-    public function show(ApplicationStatus $applicationStatus)
+    public function show(State $state)
     {
-        $this->authorize('admin.application-status.show', $applicationStatus);
+        $this->authorize('admin.state.show', $state);
 
         // TODO your code goes here
     }
@@ -109,56 +106,56 @@ class ApplicationStatusesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ApplicationStatus $applicationStatus
+     * @param State $state
      * @throws AuthorizationException
      * @return Factory|View
      */
-    public function edit(ApplicationStatus $applicationStatus)
+    public function edit(State $state)
     {
-        $this->authorize('admin.application-status.edit', $applicationStatus);
+        $this->authorize('admin.state.edit', $state);
 
 
-        return view('admin.application-status.edit', [
-            'applicationStatus' => $applicationStatus,
+        return view('admin.state.edit', [
+            'state' => $state,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateApplicationStatus $request
-     * @param ApplicationStatus $applicationStatus
+     * @param UpdateState $request
+     * @param State $state
      * @return array|RedirectResponse|Redirector
      */
-    public function update(UpdateApplicationStatus $request, ApplicationStatus $applicationStatus)
+    public function update(UpdateState $request, State $state)
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values ApplicationStatus
-        $applicationStatus->update($sanitized);
+        // Update changed values State
+        $state->update($sanitized);
 
         if ($request->ajax()) {
             return [
-                'redirect' => url('admin/application-statuses'),
+                'redirect' => url('admin/states'),
                 'message' => trans('brackets/admin-ui::admin.operation.succeeded'),
             ];
         }
 
-        return redirect('admin/application-statuses');
+        return redirect('admin/states');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param DestroyApplicationStatus $request
-     * @param ApplicationStatus $applicationStatus
+     * @param DestroyState $request
+     * @param State $state
      * @throws Exception
      * @return ResponseFactory|RedirectResponse|Response
      */
-    public function destroy(DestroyApplicationStatus $request, ApplicationStatus $applicationStatus)
+    public function destroy(DestroyState $request, State $state)
     {
-        $applicationStatus->delete();
+        $state->delete();
 
         if ($request->ajax()) {
             return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
@@ -170,17 +167,17 @@ class ApplicationStatusesController extends Controller
     /**
      * Remove the specified resources from storage.
      *
-     * @param BulkDestroyApplicationStatus $request
+     * @param BulkDestroyState $request
      * @throws Exception
      * @return Response|bool
      */
-    public function bulkDestroy(BulkDestroyApplicationStatus $request) : Response
+    public function bulkDestroy(BulkDestroyState $request) : Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])
                 ->chunk(1000)
                 ->each(static function ($bulkChunk) {
-                    ApplicationStatus::whereIn('id', $bulkChunk)->delete();
+                    State::whereIn('id', $bulkChunk)->delete();
 
                     // TODO your code goes here
                 });

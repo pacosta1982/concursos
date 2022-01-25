@@ -365,3 +365,14 @@ $factory->define(App\Models\EthnicResume::class, static function (Faker\Generato
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\State::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'color' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

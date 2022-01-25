@@ -29,7 +29,7 @@ class Application extends Model
     ];
 
     protected $appends = ['resource_url'];
-    protected $with = ['call', 'statuses'];
+    protected $with = ['call', 'statuses','resume'];
 
     /* ************************ ACCESSOR ************************* */
 
@@ -41,6 +41,11 @@ class Application extends Model
     public function call()
     {
         return $this->belongsTo('App\Models\Call');
+    }
+
+    public function resume()
+    {
+        return $this->belongsTo('App\Models\Resume');
     }
 
     public function statuses()
