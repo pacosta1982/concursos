@@ -45,7 +45,7 @@
                                         <th is='sortable' :column="'description'">{{ trans('admin.call.columns.description') }}</th>
                                         <th is='sortable' :column="'call_type_id'">{{ trans('admin.call.columns.call_type_id') }}</th>
                                         <th is='sortable' :column="'position_id'">{{ trans('admin.call.columns.position_id') }}</th>
-                                        <th is='sortable' :column="'company_id'">{{ trans('admin.call.columns.company_id') }}</th>
+                                        <!--<th is='sortable' :column="'company_id'">{{ trans('admin.call.columns.company_id') }}</th>-->
                                         <th is='sortable' :column="'start'">{{ trans('admin.call.columns.start') }}</th>
                                         <th is='sortable' :column="'end'">{{ trans('admin.call.columns.end') }}</th>
 
@@ -61,16 +61,27 @@
                                         <td>@{{ item.description }}</td>
                                         <td>@{{ item.call_type.name }}</td>
                                         <td>@{{ item.position.name }}</td>
-                                        <td>@{{ item.company.acronym }}</td>
+                                        <!--<td>@{{ item.company.acronym }}</td>-->
                                         <td>@{{ item.start | datetime }}</td>
                                         <td>@{{ item.end | datetime }}</td>
 
                                         <td>
-                                            <div class="row no-gutters">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a type="button" :href="item.resource_url + '/showadmin'" class="btn btn-primary">Calificar</a>
+                                                <a type="button" :href="item.resource_url + '/showadmitido'" class="btn btn-success">Admitidos</a>
+                                                <a type="button" :href="item.resource_url + '/showrechazado'" class="btn btn-danger">Rechazados</a>
+                                              </div>
+                                            <!--<div class="row no-gutters">
+                                                <div class="col-auto">
+                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/showadmin'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-eye"></i></a>
+                                                </div>
                                                 <div class="col-auto">
                                                     <a class="btn btn-sm btn-spinner btn-success" :href="item.resource_url + '/showadmin'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-eye"></i></a>
                                                 </div>
-                                            </div>
+                                                <div class="col-auto">
+                                                    <a class="btn btn-sm btn-spinner btn-danger" :href="item.resource_url + '/showadmin'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-eye"></i></a>
+                                                </div>
+                                            </div>-->
                                         </td>
                                     </tr>
                                 </tbody>

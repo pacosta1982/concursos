@@ -128,6 +128,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         Route::prefix('calls')->name('calls/')->group(static function () {
             Route::get('/',                                             'CallsController@index')->name('index');
             Route::get('/{call}/showadmin',                            'LlamadosController@show');
+            Route::get('/{call}/showadmitido',                          'LlamadosController@showAdmitidos');
+            Route::get('/{call}/showrechazado',                         'LlamadosController@showRechazados');
             Route::get('/{call}/showpostulante/{resume}',               'LlamadosController@showpostulante');
             Route::get('/{call}/transition/{resume}/{status}',           'LlamadosController@transition');
             Route::get('/create',                                       'CallsController@create')->name('create');
@@ -326,6 +328,13 @@ Route::post('/resume/{resume}/update', 'App\Http\Controllers\Admin\ResumesContro
 
 //Resume PDF
 Route::get('/resume/pdf', 'App\Http\Controllers\Admin\ResumesController@createPDF');
+
+//Excel
+//Route::get('users/export/', [UsersController::class, 'export']);
+Route::get('/admitidos/export/{call}', 'App\Http\Controllers\Admin\LlamadosController@export');
+Route::get('/admitidos/exportrechazados/{call}', 'App\Http\Controllers\Admin\LlamadosController@exportRechazados');
+
+
 //Resume Academic Training
 Route::get('/resume/{resume}/academic-training/create', 'App\Http\Controllers\Admin\AcademicTrainingController@create');
 Route::post('/resume/academic-training/', 'App\Http\Controllers\Admin\AcademicTrainingController@store');

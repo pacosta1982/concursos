@@ -35,6 +35,8 @@ use App\Http\Requests\Admin\Call\IndexCall;
 use App\Models\Application;
 use App\Models\Status;
 use PDF;
+use App\Exports\AdmitidosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LlamadosController extends Controller
 {
@@ -50,6 +52,17 @@ class LlamadosController extends Controller
         $this->middleware('auth');
     }
     */
+
+
+    public function export(Call $call)
+    {
+        return Excel::download(new AdmitidosExport(2, $call->id), 'postulantes_admitidos.xlsx');
+    }
+
+    public function exportRechazados(Call $call)
+    {
+        return Excel::download(new AdmitidosExport(3, $call->id), 'postulantes_no_admitidos.xlsx');
+    }
 
     public function index(IndexCall $request)
     {
@@ -367,6 +380,49 @@ class LlamadosController extends Controller
         //return $postulantes;
 
         return view('admin.call.show', compact('postulantes', 'call'));
+    }
+
+    public function showAdmitidos(Call $call)
+    {
+        //return $call;
+
+        $aux = Application::find(33);
+        //return $aux;
+
+        $postulantes = Application::where('call_id', $call->id)
+                                    ->whereHas('statuses', function($q){
+                                        $q->where('status_id', 2);
+                                    })
+                                    ->get();
+
+                                    //$postulantes = Application::all();
+
+        //return $postulantes;
+        $title  = "POSTULANTES ADMITIDOS";
+        $url = 'export';
+        return view('admin.call.filtro', compact('postulantes', 'call', 'title','url'));
+    }
+
+    public function showRechazados(Call $call)
+    {
+        //return $call;
+
+        $aux = Application::find(33);
+        //return $aux;
+
+        $postulantes = Application::where('call_id', $call->id)
+                                    ->whereHas('statuses', function($q){
+                                        $q->where('status_id', 3);
+                                    })
+                                    ->get();
+
+                                    //$postulantes = Application::all();
+
+        //return $postulantes;
+
+        $title  = "POSTULANTES NO ADMITIDOS";
+        $url = 'exportrechazados';
+        return view('admin.call.filtro', compact('postulantes', 'call', 'title','url'));
     }
 
     public function showpostulante(Call $call, Resume $resume)
