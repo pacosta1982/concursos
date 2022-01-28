@@ -93,6 +93,7 @@
                     <th >{{ trans('admin.academic-training.columns.academic_state_id') }}</th>
                     <th >{{ trans('admin.academic-training.columns.name') }}</th>
                     <th >{{ trans('admin.academic-training.columns.institution') }}</th>
+                    <th >{{ trans('admin.academic-training.columns.workload') }}</th>
                     <th class="text-center">{{ trans('admin.academic-training.columns.registered') }}</th>
                     <th ></th>
                 </tr>
@@ -104,6 +105,7 @@
                     <td>{{$item->academic_state->name}}</td>
                     <td>{{$item->name}}</td>
                     <td>{{$item->institution}}</td>
+                    <td>{{$item->workload}}</td>
                     <td class="text-center"><i class="{{ $item->registered ? 'fa fa-check text-success' : 'fa fa-times text-danger '}}" aria-hidden="true"></i></td>
                     <td></td>
                 </tr>
