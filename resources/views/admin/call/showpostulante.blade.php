@@ -4,8 +4,6 @@
 
 @section('body')
 
-
-
 <div class="card">
     <div class="card-header text-center">
          CURRICULO - {{$resume->names}} {{$resume->last_names}}
@@ -139,8 +137,8 @@
                 <tr>
                     <td>{{$item->company}}</td>
                     <td>{{$item->position}}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{$item->start}}</td>
+                    <td>{{$item->end}}</td>
                     <td>{{$item->end_reason->name}}</td>
                     <td>{{$item->tasks}}</td>
                     <td>{{$item->contact}}</td>
