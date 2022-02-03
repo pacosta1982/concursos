@@ -83,7 +83,8 @@
                                         <td>@{{ item.code }}</td>
                                         <td>@{{ item.call.description }}</td>
                                         <td>@{{ item.call.position.name }}</td>
-                                        <td>@{{ item.statuses.status.name }}</td>
+                                        <td>En proceso</td>
+                                        <!--<td>@{{ item.statuses.status.name }}</td>-->
                                         <!--<td>@{{ item.data }}</td>-->
 
                                         <td>
