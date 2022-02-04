@@ -49,6 +49,9 @@ class ApplicationsController extends Controller
             $authID = '0';
         }
 
+        //$aux = Application::find(226);
+        //return $aux->getMedia('gallery');;
+
         //$authID = Auth::user()->id;
         $data = AdminListing::create(Application::class)->processRequestAndGet(
             // pass the request with params

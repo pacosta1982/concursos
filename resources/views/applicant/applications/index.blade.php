@@ -84,19 +84,10 @@
                                         <td>@{{ item.call.description }}</td>
                                         <td>@{{ item.call.position.name }}</td>
                                         <td>En proceso</td>
+                                        <td> <a class="btn btn-sm btn-spinner btn-info" :href="item.document_url"><i class="fa fa-eye"></i></a>  </td>
+
                                         <!--<td>@{{ item.statuses.status.name }}</td>-->
                                         <!--<td>@{{ item.data }}</td>-->
-
-                                        <td>
-                                            <div class="row no-gutters">
-                                                <!--<div class="col-auto">
-                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
-                                                </div>-->
-                                                <!--<form class="col" @submit.prevent="deleteItem(item.resource_url)">
-                                                    <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
-                                                </form>-->
-                                            </div>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

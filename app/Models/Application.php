@@ -3,10 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Brackets\Media\HasMedia\ProcessMediaTrait;
+use Brackets\Media\HasMedia\AutoProcessMediaTrait;
+use Brackets\Media\HasMedia\HasMediaCollectionsTrait;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
 
 
-class Application extends Model
+class Application extends Model implements HasMedia
 {
+
+
+    use ProcessMediaTrait;
+    use AutoProcessMediaTrait;
+    use HasMediaCollectionsTrait;
+
 
     protected $fillable = [
         'code',
@@ -28,8 +39,12 @@ class Application extends Model
 
     ];
 
-    protected $appends = ['resource_url'];
+    protected $appends = ['resource_url','document_url'];
     protected $with = ['call', 'statuses','resume'];
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection('gallery');
+    }
 
     /* ************************ ACCESSOR ************************* */
 
@@ -52,4 +67,20 @@ class Application extends Model
     {
         return $this->hasOne('App\Models\ApplicationStatus')->latest('id');
     }
+
+    /*public function files()
+    {
+        return $this->getMedia('gallery');
+    }*/
+
+    public function getDocumentUrlAttribute()
+    {
+        //return url('/admin/document/' . $this->getKey());
+        $mediaItems = $this->getMedia('gallery');
+        $publicUrl = isset($mediaItems[0]) ? url($mediaItems[0]->getUrl()): '';
+        return $publicUrl;
+        //return 'abc';*/
+    }
+
+
 }
