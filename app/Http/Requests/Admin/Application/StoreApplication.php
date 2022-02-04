@@ -60,4 +60,15 @@ class StoreApplication extends TranslatableFormRequest
 
         return $sanitized;
     }
+
+    public function messages()
+    {
+        return [
+            //'received_at.required' => 'Es necesario agregar una fecha al subir un documento.'
+            //'document.required' => 'Es necesario seleccionar un documento.',
+            'file.required' => 'Archivo Adjunto Requerido',
+            //'file.mimes' => 'Solo se permite imagenes y archivos PDF'
+
+        ];
+    }
 }
