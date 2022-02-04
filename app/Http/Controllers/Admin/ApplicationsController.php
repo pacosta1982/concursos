@@ -12,6 +12,7 @@ use App\Models\Application;
 use App\Models\Call;
 use App\Models\ApplicationStatus;
 use App\Models\Resume;
+use App\Models\MediaDocument;
 use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -199,20 +200,107 @@ class ApplicationsController extends Controller
      */
     public function store(StoreApplication $request)
     {
-        return $request;
-        dd($request);
-        //Sanitize input
-        $sanitized = $request->getSanitized();
+
+
+        $app = Application::where('call_id', $request->call_id)
+            ->where('resume_id', $request->resume_id)->exists();
+        $resume = Resume::find($request->resume_id);
+        $call = Call::find($request->call_id);
+
+        //return $request;
+
+        if (!$app) {
+            # code...
+            //return 'crear';
+            $application = new Application;
+            $application->code = 'test';
+            $application->call_id = $request->call_id;
+            $application->resume_id = $request->resume_id;
+            $application->data = $resume->toJson();
+            $application->save();
+
+            $number = $application->id;
+            $length = 4;
+            $string = substr(str_repeat(0, $length).$number, - $length);
+            $flight = Application::find($application->id);
+            $flight->code = $call->position->acronym.$string;
+            $flight->save();
+
+            //if ($request->filled('document')) {
+                        $fileNameAux = date('Y-m-d h:i:s') . '-' . $number . '-' . $request->input('document'); //. '_' . $request->file->getClientOriginalName();
+                        $extension = pathinfo($request->file->getClientOriginalName(), PATHINFO_EXTENSION);
+                        $fileName = base64_encode($fileNameAux);
+
+                        $arr = array(
+                            'name' => $request->file->getClientOriginalName(),
+                            'file_name' => $request->file->getClientOriginalName(),
+                        );
+                        $arr_tojson = json_encode($arr);
+
+                        $media = MediaDocument::create([
+                            'model_type' => 'App\Models\Application',
+                            'model_id' => $application->id,
+                            'collection_name' => 'gallery',
+                            'name' => $fileName,
+                            'file_name' => $fileName . '.' . $extension,
+                            'mime_type' => $request->file->getMimeType(),
+                            'disk' => 'gallery',
+                            'size' => $request->file->getSize(),
+                            'manipulations' => '[]',
+                            'custom_properties' => $arr_tojson,
+                            'generated_conversions' => '[]',
+                            'responsive_images' => '[]',
+                            'order_column' => '1',
+                        ]);
+                        //Storage::disk('supporting-documents')->put($request->file('file'), 'supporting-documents');
+                        $filePath = $request->file('file')->storeAs($media->id, $fileName . '.' . $extension, 'gallery');
+            //}
+
+
+
+            $status = new ApplicationStatus;
+
+            $status->application_id = $application->id;
+            $status->status_id = 1;
+            $status->user = Auth::user()->id;
+            $status->user_model = 'App\Models\User';
+
+            $status->save();
+
+            return redirect('applications')->with('status', 'success');
+
+        }else{
+            return redirect('calls')->with('status', 'error');
+            //return "editar";
+
+            /*$application = Application::where('call_id', $request->call_id)
+            ->where('resume_id', $request->resume_id)->first();
+
+            //return $application;
+
+            //$number = $application->id;
+            //return $aux->id;
+            $flight = Application::find($application->id);
+            $flight->data = $resume->toJson();
+            $flight->save();
+
+            //return $flight;
+
+
+            return redirect('applications')->with('status', 'update');*/
+        }
+
+        /*$sanitized = $request->getSanitized();
 
         // Store the Application
-        dd($sanitized);
+        return $app;
         $application = Application::create($sanitized);
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/applications'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/applications');
+        return redirect('admin/applications');*/
     }
 
     /**

@@ -42,7 +42,54 @@
         </div>
     </div>
 </div>
-<a href="{{ url('calls/'.$call->id.'/application/'.$resume->id.'/transitionsave') }}" class="btn btn-block btn-square btn-lg text-white bg-primary"><i class="fa fa-paper-plane"></i> Enviar</a>
+<!--<a href="{{ url('calls/'.$call->id.'/application/'.$resume->id.'/transitionsave') }}" class="btn btn-block btn-square btn-lg text-white bg-primary"><i class="fa fa-paper-plane">
+    </i> Enviar</a>-->
+
+<div class="container-xl">
+    <div class="card">
+
+
+        <form action="{{ url('admin/applications') }}" class="form-horizontal form-create"  method="post" enctype="multipart/form-data">
+            <input type="text" hidden name="call_id" value="{{ $call->id }}">
+            <input type="text" hidden name="resume_id" value="{{ $resume->id }}">
+            <div class="card-header">
+            <i class="fa fa-plus"></i> {{ trans('admin.applicant-document.actions.create') }}
+        </div>
+        @csrf
+        <div class="card-body">
+            <!--<div class="alert alert-success">
+            <ul>
+                <li>Solo es necesario subir fotos de las cédulas y en el caso del documento de la tenencia subir foto de la portada del mismo.</li>
+            </ul>
+        </div>-->
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+            <div class="form-group col-sm-12" :class="{'has-danger': errors.has('address')}">
+                <label for="document" >{{ trans('admin.applicant-document.columns.file') }}</label>
+                <div>
+                    <input type="file" name="file" class="form-control-file" id="chooseFile">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-block btn-square btn-lg text-white bg-primary" >
+                    <i class="fa fa-paper-plane"></i>
+                    Enviar
+                </button>
+            </div>
+
+        </div>
+        </form>
+    </div>
+    </div>
+
 <br>
   <div class="card">
     <div class="card-header text-center">

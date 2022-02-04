@@ -13,10 +13,10 @@ class StoreApplication extends TranslatableFormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    /*public function authorize(): bool
     {
         return Gate::allows('admin.application.create');
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the requests untranslatable fields.
@@ -26,9 +26,10 @@ class StoreApplication extends TranslatableFormRequest
     public function untranslatableRules(): array
     {
         return [
-            'code' => ['nullable'],
-            'call_id' => ['nulabble'],
-            'resume_id' => ['nullable'],
+            'code' => ['string'],
+            'call_id' => ['string'],
+            'resume_id' => ['string'],
+            'file' => ['required'],
 
         ];
     }
@@ -41,7 +42,7 @@ class StoreApplication extends TranslatableFormRequest
     public function translatableRules($locale): array
     {
         return [
-            'data' => ['nullable', 'string'],
+            'data' => ['string'],
 
         ];
     }
