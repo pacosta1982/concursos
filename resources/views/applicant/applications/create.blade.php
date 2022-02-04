@@ -45,7 +45,7 @@
 <!--<a href="{{ url('calls/'.$call->id.'/application/'.$resume->id.'/transitionsave') }}" class="btn btn-block btn-square btn-lg text-white bg-primary"><i class="fa fa-paper-plane">
     </i> Enviar</a>-->
 
-<div class="container-xl">
+
     <div class="card">
 
 
@@ -88,7 +88,7 @@
         </div>
         </form>
     </div>
-    </div>
+
 
 <br>
   <div class="card">
