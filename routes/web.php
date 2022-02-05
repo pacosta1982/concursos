@@ -366,6 +366,7 @@ Route::get('/calls/{call}/application/{resume}/transitionsave', 'App\Http\Contro
 
 //Applications
 Route::get('/applications', 'App\Http\Controllers\Admin\ApplicationsController@index');
+Route::post('/applications', 'App\Http\Controllers\Admin\ApplicationsController@store')->name('store');
 //Reports
 /*Route::get('/reports', function () {
     return view('applicant.reports.index');
@@ -489,7 +490,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         Route::prefix('applications')->name('applications/')->group(static function () {
             Route::get('/',                                             'ApplicationsController@index')->name('index');
             Route::get('/create',                                       'ApplicationsController@create')->name('create');
-            Route::post('/',                                            'ApplicationsController@store')->name('store');
+            //Route::post('/',                                            'ApplicationsController@store')->name('store');
             Route::get('/{application}/edit',                           'ApplicationsController@edit')->name('edit');
             Route::post('/bulk-destroy',                                'ApplicationsController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{application}',                               'ApplicationsController@update')->name('update');

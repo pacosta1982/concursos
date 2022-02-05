@@ -49,7 +49,7 @@
     <div class="card">
 
 
-        <form action="{{ url('admin/applications') }}" class="form-horizontal form-create"  method="post" enctype="multipart/form-data">
+        <form action="{{ url('applications') }}" class="form-horizontal form-create"  method="post" enctype="multipart/form-data">
             <input type="text" hidden name="call_id" value="{{ $call->id }}">
             <input type="text" hidden name="resume_id" value="{{ $resume->id }}">
             <div class="card-header">
