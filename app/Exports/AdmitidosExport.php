@@ -41,6 +41,7 @@ class AdmitidosExport implements FromQuery, WithHeadings, WithMapping, ShouldAut
             'NACIMIENTO',
             'DOCUMENTO',
             'EMAIL',
+            'DESCRIPCION',
             'ESTADO',
         ];
     }
@@ -53,6 +54,7 @@ class AdmitidosExport implements FromQuery, WithHeadings, WithMapping, ShouldAut
             $invoice->resume->birthdate,
             $invoice->resume->government_id,
             $invoice->resume->email,
+            $invoice->statuses->description,
             $invoice->statuses->status->name,
             //Date::dateTimeToExcel($invoice->created_at),
         ];

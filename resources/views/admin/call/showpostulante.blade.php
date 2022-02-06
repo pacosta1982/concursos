@@ -61,6 +61,7 @@
                 <p class="card-text">Email: {{$resume->email}}</p>
             </div>
     </div>
+    <a class="btn btn-block btn-square  btn-danger" target="_blank" href="{{ $application->document_url }}"><i class="fa fa-file-pdf-o"> VER DOCUMENTO</i></a>
     <!--<a href="resume/{{$resume->id}}/edit" class="btn btn-primary">Editar</a>-->
     </div>
   </div>
@@ -126,6 +127,7 @@
                     <th>{{ trans('admin.work-experience.columns.position') }}</th>
                     <th>{{ trans('admin.work-experience.columns.start') }}</th>
                     <th>{{ trans('admin.work-experience.columns.end') }}</th>
+                    <th>{{ trans('admin.work-experience.columns.duration') }}</th>
                     <th>{{ trans('admin.work-experience.columns.end_reason_id') }}</th>
                     <th>{{ trans('admin.work-experience.columns.tasks') }}</th>
                     <th>{{ trans('admin.work-experience.columns.contact') }}</th>
@@ -139,6 +141,7 @@
                     <td>{{$item->position}}</td>
                     <td>{{$item->start}}</td>
                     <td>{{$item->end}}</td>
+                    <td>{{ round((strtotime($item->end) - strtotime($item->start)) /60/60/24/30) }}  meses</td>
                     <td>{{$item->end_reason->name}}</td>
                     <td>{{$item->tasks}}</td>
                     <td>{{$item->contact}}</td>

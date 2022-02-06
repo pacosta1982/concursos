@@ -84,7 +84,17 @@
                                         <td>@{{ item.call.description }}</td>
                                         <td>@{{ item.call.position.name }}</td>
                                         <td>En proceso</td>
-                                        <td> <a class="btn btn-sm btn-spinner btn-info" :href="item.document_url"><i class="fa fa-eye"></i></a>  </td>
+                                        <td>
+                                            <div class="row no-gutters">
+                                                <div class="col-auto">
+                                                    <a class="btn btn-sm btn-warning" :href="item.resource_url + '/showdocument'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-check-square"></i> Actualizar Documento</a>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <a class="btn btn-sm btn-info" target="_blank" :href="item.document_url"><i class="fa fa-eye"></i> Ver Documento</a>
+                                                </div>
+
+                                            </div>
+                                        </td>
 
                                         <!--<td>@{{ item.statuses.status.name }}</td>-->
                                         <!--<td>@{{ item.data }}</td>-->

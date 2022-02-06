@@ -65,7 +65,7 @@ class Application extends Model implements HasMedia
 
     public function statuses()
     {
-        return $this->hasOne('App\Models\ApplicationStatus')->latest('id');
+        return $this->hasOne('App\Models\ApplicationStatus')->latest();
     }
 
     /*public function files()

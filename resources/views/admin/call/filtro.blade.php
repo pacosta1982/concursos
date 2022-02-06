@@ -33,9 +33,10 @@
                             <th class="d-none d-sm-block">#</th>
                             <th class="text-center">CODIGO</th>
                             <th>NOMBRE</th>
-                            <th class="text-center">FEC NAC</th>
+                            <!--<th class="text-center">FEC NAC</th>-->
                             <th class="text-center">DOCUMENTO</th>
                             <th>EMAIL</th>
+                            <th>DESCRIPCION</th>
                             <th class="text-center">ESTADO</th>
                             <th></th>
                             <th></th>
@@ -47,9 +48,10 @@
                             <th class="d-none d-sm-block" scope="row">{{$key+1}}</th>
                             <td class="text-center">{{ $item->code }}</td>
                             <td>{{ $item->resume->names }} {{ $item->resume->last_names }}</td>
-                            <td class="text-center">{{ $item->resume->birthdate }}</td>
+                            <!--<td class="text-center">{{ $item->resume->birthdate }}</td>-->
                             <td class="text-center">{{ $item->resume->government_id }}</td>
                             <td >{{ $item->resume->email }}</td>
+                            <td>{{ $item->statuses->description }}</td>
                             <td class="text-center"> <span class="badge"
                                 style="{{ $item->statuses->status->name == 'Admitido' ?  "background-color: green; color:white" : ($item->statuses->status->name == 'No Admitido' ? "background-color: red; color:white" : "") }}">
                                 {{ $item->statuses->status->name }}

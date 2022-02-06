@@ -36,6 +36,7 @@ use App\Models\Application;
 use App\Models\Status;
 use PDF;
 use App\Exports\AdmitidosExport;
+use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
 
 class LlamadosController extends Controller
@@ -367,7 +368,7 @@ class LlamadosController extends Controller
     {
         //return $call;
 
-        $aux = Application::find(33);
+        //$aux = Application::find(33);
         //return $aux;
 
         $postulantes = Application//::select( 'code', 'call_id', 'resume_id', 'resumes.names', 'resumes.last_names', 'resumes.government_id', 'resumes.email', 'resumes.birthdate')
@@ -407,7 +408,7 @@ class LlamadosController extends Controller
     {
         //return $call;
 
-        $aux = Application::find(33);
+        //$aux = Application::find(33);
         //return $aux;
 
         $postulantes = Application::where('call_id', $call->id)
@@ -429,7 +430,10 @@ class LlamadosController extends Controller
     {
 
         $navegacion = Status::where('id','!=', 1 )->get();
-        return view('admin.call.showpostulante', compact('resume', 'call','navegacion'));
+        $application = Application::where('call_id',$call->id)
+                                    ->where('resume_id',$resume->id)
+                                    ->first();
+        return view('admin.call.showpostulante', compact('resume', 'call','navegacion','application'));
     }
 
     public function transition(Call $call, Resume $resume, Status $status)

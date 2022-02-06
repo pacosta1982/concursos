@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Application\BulkDestroyApplication;
 use App\Http\Requests\Admin\Application\DestroyApplication;
 use App\Http\Requests\Admin\Application\IndexApplication;
 use App\Http\Requests\Admin\Application\StoreApplication;
+use App\Http\Requests\Admin\Application\StoreApplicationDocument;
 use App\Http\Requests\Admin\Application\UpdateApplication;
 use App\Models\Application;
 use App\Models\Call;
@@ -24,6 +25,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ApplicationsController extends Controller
 {
@@ -98,6 +100,30 @@ class ApplicationsController extends Controller
         //return $resume;
         return view('applicant.applications.create', compact('call', 'resume'));
     }
+
+    public function showdocument(Application $application)
+    {
+        //$this->authorize('admin.application.create');
+
+        //$resume = Resume::where('created_by', Auth::user()->id)->first();
+
+        //return $application->getMedia('gallery');
+        ///$documents = $application->getFirstMedia();
+        //$documents = $docu->toJson();
+
+        $documents = MediaDocument::where('model_type', 'App\Models\Application')
+                                    ->where('model_id', $application->id)
+                                    ->first();
+        if (!empty($documents)) {
+            $aux = $data = json_decode($documents->custom_properties);
+            //return $aux->name;
+        }else{
+            $aux='';
+        }
+        return view('applicant.applications.show', compact('application','documents','aux'));
+    }
+
+
 
     public function transition(Call $call, Resume $resume)
     {
@@ -201,6 +227,45 @@ class ApplicationsController extends Controller
      * @param StoreApplication $request
      * @return array|RedirectResponse|Redirector
      */
+
+    public function storeDocument(StoreApplicationDocument $request)
+    {
+
+            //return $request;
+            $affectedRows = MediaDocument::where('model_type', 'App\Models\Application')
+            ->where('model_id', $request->app_id)->delete();
+
+            $fileNameAux = date('Y-m-d h:i:s') . '-' . $request->app_id . '-' . $request->input('document'); //. '_' . $request->file->getClientOriginalName();
+            $extension = pathinfo($request->file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $fileName = base64_encode($fileNameAux);
+
+            $arr = array(
+                'name' => $request->file->getClientOriginalName(),
+                'file_name' => $request->file->getClientOriginalName(),
+            );
+            $arr_tojson = json_encode($arr);
+
+            $media = MediaDocument::create([
+                'model_type' => 'App\Models\Application',
+                'model_id' => $request->app_id,
+                'collection_name' => 'gallery',
+                'name' => $fileName,
+                'file_name' => $fileName . '.' . $extension,
+                'mime_type' => $request->file->getMimeType(),
+                'disk' => 'gallery',
+                'size' => $request->file->getSize(),
+                'manipulations' => '[]',
+                'custom_properties' => $arr_tojson,
+                'generated_conversions' => '[]',
+                'responsive_images' => '[]',
+                'order_column' => '1',
+            ]);
+            //Storage::disk('supporting-documents')->put($request->file('file'), 'supporting-documents');
+            $filePath = $request->file('file')->storeAs($media->id, $fileName . '.' . $extension, 'gallery');
+            return redirect('applications')->with('status', 'update');
+
+    }
+
     public function store(StoreApplication $request)
     {
 

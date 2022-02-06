@@ -41,11 +41,11 @@ class ResumesController extends Controller
      * @param IndexResume $request
      * @return array|Factory|View
      */
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
-    */
+
 
     public function index(IndexAcademicTraining $request)
     {

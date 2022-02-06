@@ -366,7 +366,9 @@ Route::get('/calls/{call}/application/{resume}/transitionsave', 'App\Http\Contro
 
 //Applications
 Route::get('/applications', 'App\Http\Controllers\Admin\ApplicationsController@index');
-Route::post('/applications', 'App\Http\Controllers\Admin\ApplicationsController@store')->name('store');
+Route::post('/applications', 'App\Http\Controllers\Admin\ApplicationsController@store');
+Route::post('/applications/documents', 'App\Http\Controllers\Admin\ApplicationsController@storeDocument');
+Route::get('admin/applications/{application}/showdocument', 'App\Http\Controllers\Admin\ApplicationsController@showdocument');
 //Reports
 /*Route::get('/reports', function () {
     return view('applicant.reports.index');
