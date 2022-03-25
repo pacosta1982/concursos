@@ -131,6 +131,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::get('/{call}/showadmitido',                          'LlamadosController@showAdmitidos');
             Route::get('/{call}/showrechazado',                         'LlamadosController@showRechazados');
             Route::get('/{call}/showpostulante/{resume}',               'LlamadosController@showpostulante');
+            Route::get('/{call}/showpostulantepdf/{resume}',             'LlamadosController@createPDFsingle');
             Route::get('/{call}/transition/{resume}/{status}',           'LlamadosController@transition');
             Route::get('/create',                                       'CallsController@create')->name('create');
             Route::post('/',                                            'CallsController@store')->name('store');

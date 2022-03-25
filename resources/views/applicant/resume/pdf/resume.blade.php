@@ -72,5 +72,6 @@
 @include('applicant.resume.pdf.header')
 @include('applicant.resume.pdf.academic')
 @include('applicant.resume.pdf.work')
+@include('applicant.resume.pdf.language')
 </body>
 </html>

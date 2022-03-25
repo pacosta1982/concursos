@@ -60,6 +60,16 @@ class LlamadosController extends Controller
         return Excel::download(new AdmitidosExport(2, $call->id), 'postulantes_admitidos.xlsx');
     }
 
+    public function createPDFsingle($call, $resume_id)
+    {
+
+        $resume = Resume::find($resume_id);
+        //return $resume;
+        $pdf = PDF::loadView('applicant.resume.pdf.resume', compact('resume'));
+        return $pdf->download('CV-' . $resume->names . $resume->last_names . '.pdf');
+
+    }
+
     public function exportRechazados(Call $call)
     {
         return Excel::download(new AdmitidosExport(3, $call->id), 'postulantes_no_admitidos.xlsx');
@@ -406,10 +416,6 @@ class LlamadosController extends Controller
 
     public function showRechazados(Call $call)
     {
-        //return $call;
-
-        //$aux = Application::find(33);
-        //return $aux;
 
         $postulantes = Application::where('call_id', $call->id)
                                     ->whereHas('statuses', function($q){

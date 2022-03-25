@@ -4,6 +4,17 @@
 
 @section('body')
 
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="form-group col">
+                <p class="card-text"><a href="{{ url('admitidos/export/'.$call->id) }}" class="btn btn-block btn-square btn-lg text-white bg-success"><i class="fa fa-file-excel-o"></i> Exportar Excel</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="row">
     <div class="col">
@@ -46,6 +57,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-auto">
                                         <a class="btn btn-sm btn-spinner btn-success" href="{{ url('admin/calls/'.$call->id.'/showpostulante/'.$item->resume_id) }}" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-eye"></i></a>
+                                    </div>
+
+                                    <div class="col-auto">
+                                        <a class="btn btn-sm btn-spinner btn-danger" href="{{ url('admin/calls/'.$call->id.'/showpostulantepdf/'.$item->resume_id) }}" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-file-pdf-o "></i></a>
                                     </div>
                                 </div>
                             </td>
