@@ -65,12 +65,12 @@
                 <input type="file" name="file" class="form-control-file" id="chooseFile">
             </div>
         </div>
-        <div class="form-group col-sm-12">
+       <!-- <div class="form-group col-sm-12">
             <button type="submit" class="btn btn-block btn-square btn-lg text-white bg-primary" >
                 <i class="fa fa-paper-plane"></i>
                 Enviar
             </button>
-        </div>
+        </div>-->
 
     </div>
     </form>

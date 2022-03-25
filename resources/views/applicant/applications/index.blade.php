@@ -85,12 +85,22 @@
                                         <td>@{{ item.call.position.name }}</td>
                                         <td>En proceso</td>
                                         <td>
-                                            <div class="row no-gutters" v-if="item.call.id > 14">
-                                                <div class="col-auto">
+                                            <div class="row no-gutters">
+                                                <!--<div class="col-auto">
                                                     <a class="btn btn-sm btn-warning" :href="item.resource_url + '/showdocument'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-check-square"></i> Actualizar Documento</a>
+                                                </div>-->
+                                                <!--<div class="col-auto">
+                                                    <a class="btn btn-sm btn-warning" :href="item.resource_url + '/showdocument'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-check-square"></i> Actualizar Documento</a>
+                                                </div>-->
+                                                <div class="col-auto" v-if="item.call.id===12">
+                                                    <a class="btn btn-sm btn-success" target="_blank" href="https://www.paraguayconcursa.gov.py/sicca/seleccion/verPostulacion/verPostulacionPortal.seam?idConcursoPuestoAgr=8807&idConcurso=3788&from=seleccion%2FbuscarConcurso%2Fevaluados%2Fevaluados&sugestion=MINISTERIO+DE+URBANISMO%2C+VIVIENDA+Y+HABITAT&sugestionGrupo=&cid=3650965"><i class="fa fa-list" aria-hidden="true"></i> Ver Proceso</a>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <a class="btn btn-sm btn-info" target="_blank" :href="item.document_url"><i class="fa fa-eye"></i> Ver Documento</a>
+                                                <div class="col-auto" v-if="item.call.id===11">
+                                                    <a class="btn btn-sm btn-success" target="_blank" href="https://www.paraguayconcursa.gov.py/sicca/seleccion/verPostulacion/verPostulacionPortal.seam?idConcursoPuestoAgr=8806&idConcurso=3788&from=seleccion%2FbuscarConcurso%2Fevaluados%2Fevaluados&sugestion=MINISTERIO+DE+URBANISMO%2C+VIVIENDA+Y+HABITAT&sugestionGrupo=&cid=4170860"><i class="fa fa-list" aria-hidden="true"></i> Ver Proceso</a>
+                                                </div>
+
+                                                <div class="col-auto"  v-if="item.call.id > 14">
+                                                    <a class="btn btn-sm btn-info " target="_blank" :href="item.document_url"><i class="fa fa-eye"></i> Ver Documento</a>
                                                 </div>
 
                                             </div>
