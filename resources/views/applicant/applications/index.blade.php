@@ -80,7 +80,7 @@
                                         </td>
 
                                     <td>@{{ item.id }}</td>-->
-                                        <td>@{{ item.code }}</td>
+                                        <td>@{{ item.resume.government_id }}</td>
                                         <td>@{{ item.call.description }}</td>
                                         <td>@{{ item.call.position.name }}</td>
                                         <td>En proceso</td>
