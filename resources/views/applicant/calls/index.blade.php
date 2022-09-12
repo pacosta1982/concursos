@@ -75,6 +75,9 @@
                                                <!-- <div class="col-auto">
                                                     <a class="btn btn-sm btn-spinner btn-success" :href="item.is_admin + '/application'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-check-square"></i></a>
                                                 </div>-->
+
+
+
                                             </div>
                                         </td>
                                     </tr>
