@@ -294,7 +294,7 @@ class ApplicationsController extends Controller
             $flight->code = $call->position->acronym.$string;
             $flight->save();
 
-            //if ($request->filled('document')) {
+            if ($request->filled('document')) {
                         $fileNameAux = date('Y-m-d h:i:s') . '-' . $number . '-' . $request->input('document'); //. '_' . $request->file->getClientOriginalName();
                         $extension = pathinfo($request->file->getClientOriginalName(), PATHINFO_EXTENSION);
                         $fileName = base64_encode($fileNameAux);
@@ -322,7 +322,7 @@ class ApplicationsController extends Controller
                         ]);
                         //Storage::disk('supporting-documents')->put($request->file('file'), 'supporting-documents');
                         $filePath = $request->file('file')->storeAs($media->id, $fileName . '.' . $extension, 'gallery');
-            //}
+            }
 
 
 

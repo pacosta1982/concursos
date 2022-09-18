@@ -72,12 +72,12 @@
             </div>
         @endif
 
-            <div class="form-group col-sm-12" :class="{'has-danger': errors.has('address')}">
+            {{--<div class="form-group col-sm-12" :class="{'has-danger': errors.has('address')}">
                 <label for="document" >{{ trans('admin.applicant-document.columns.file') }}</label>
                 <div>
                     <input type="file" name="file" class="form-control-file" id="chooseFile">
                 </div>
-            </div>
+            </div>--}}
             <div class="form-group col-sm-12">
                 <button type="submit" class="btn btn-block btn-square btn-lg text-white bg-primary" >
                     <i class="fa fa-paper-plane"></i>

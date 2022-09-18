@@ -29,7 +29,7 @@ class StoreApplication extends TranslatableFormRequest
             'code' => ['string'],
             'call_id' => ['string'],
             'resume_id' => ['string'],
-            'file' => ['required'],
+            //'file' => ['required'],
 
         ];
     }
@@ -66,7 +66,7 @@ class StoreApplication extends TranslatableFormRequest
         return [
             //'received_at.required' => 'Es necesario agregar una fecha al subir un documento.'
             //'document.required' => 'Es necesario seleccionar un documento.',
-            'file.required' => 'Archivo Adjunto Requerido',
+            //'file.required' => 'Archivo Adjunto Requerido',
             //'file.mimes' => 'Solo se permite imagenes y archivos PDF'
 
         ];

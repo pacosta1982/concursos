@@ -99,9 +99,9 @@
                                                     <a class="btn btn-sm btn-success" target="_blank" href="https://www.paraguayconcursa.gov.py/sicca/seleccion/verPostulacion/verPostulacionPortal.seam?idConcursoPuestoAgr=8806&idConcurso=3788&from=seleccion%2FbuscarConcurso%2Fevaluados%2Fevaluados&sugestion=MINISTERIO+DE+URBANISMO%2C+VIVIENDA+Y+HABITAT&sugestionGrupo=&cid=4170860"><i class="fa fa-list" aria-hidden="true"></i> Ver Proceso</a>
                                                 </div>
 
-                                                <div class="col-auto"  v-if="item.call.id > 14">
+                                                {{--<div class="col-auto"  v-if="item.call.id > 14">
                                                     <a class="btn btn-sm btn-info " target="_blank" :href="item.document_url"><i class="fa fa-eye"></i> Ver Documento</a>
-                                                </div>
+                                                </div>--}}
 
                                             </div>
                                         </td>
