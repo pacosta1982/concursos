@@ -36,6 +36,7 @@ use App\Models\Application;
 use App\Models\Status;
 use PDF;
 use App\Exports\AdmitidosExport;
+use App\Exports\InvoicesExport;
 use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -57,7 +58,8 @@ class LlamadosController extends Controller
 
     public function export(Call $call)
     {
-        return Excel::download(new AdmitidosExport(2, $call->id), 'postulantes_admitidos.xlsx');
+        return Excel::download(new InvoicesExport($call->id), 'postulantes'.$call->Position->name.'.xlsx');
+        //return Excel::download(new AdmitidosExport(2, $call->id), 'postulantes.xlsx');
     }
 
     public function createPDFsingle($call, $resume_id)

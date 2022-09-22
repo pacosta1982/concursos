@@ -79,7 +79,7 @@ class ApplicationStatusesController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-        $aux = Application::find($sanitized['application_id']);
+        $aux = Application::find($request['application_id']);
         //return $aux->call_id;
 
         // Store the ApplicationStatus

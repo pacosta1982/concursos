@@ -68,8 +68,8 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a type="button" :href="item.resource_url + '/showadmin'" class="btn btn-primary">Calificar</a>
-                                                <a type="button" :href="item.resource_url + '/showadmitido'" class="btn btn-success">Admitidos</a>
-                                                <a type="button" :href="item.resource_url + '/showrechazado'" class="btn btn-danger">Rechazados</a>
+                                                {{--<a type="button" :href="item.resource_url + '/showadmitido'" class="btn btn-success">Admitidos</a>
+                                                <a type="button" :href="item.resource_url + '/showrechazado'" class="btn btn-danger">Rechazados</a>--}}
                                               </div>
                                             <!--<div class="row no-gutters">
                                                 <div class="col-auto">
