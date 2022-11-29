@@ -21,6 +21,7 @@ use App\Http\Requests\StoreApplicantUserConyuge;
 use App\Http\Requests\UpdateApplicantUserConyuge;
 use App\Http\Requests\UpdateApplicantUser;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 use App\Mail\DemoEmail;
 use Illuminate\Support\Facades\Mail;
@@ -74,6 +75,8 @@ class HomeController extends Controller
 
     public function homeCalls(Request $request)
     {
+        $fecha=Carbon::now();
+        $hoy = $fecha->toJSON();
 
         $data = AdminListing::create(Call::class)->processRequestAndGet(
             // pass the request with params
@@ -96,7 +99,7 @@ class HomeController extends Controller
         }
         $user = Auth::user();
 
-        return view('applicant.calls.index', compact('user', 'data'));
+        return view('applicant.calls.index', compact('user', 'data', 'hoy'));
     }
 
     public function getDocuments(Request $request)
