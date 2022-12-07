@@ -48,7 +48,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
+        $fecha=Carbon::now();
+        $hoy = $fecha->toJSON();
         $data = AdminListing::create(Call::class)->processRequestAndGet(
             // pass the request with params
             $request,
@@ -70,7 +71,7 @@ class HomeController extends Controller
         }
         $user = Auth::user();
 
-        return view('applicant.home', compact('user', 'data'));
+        return view('applicant.home', compact('user', 'data', 'hoy'));
     }
 
     public function homeCalls(Request $request)
