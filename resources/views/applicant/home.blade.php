@@ -3,6 +3,7 @@
 @section('title', trans('admin.applicant.actions.trakings'))
 
 @section('body')
+<body onLoad="setTimeout('self.location.reload()', 60000)"></body>
 
 <div class="card   text-center">
     <div class="card-header">

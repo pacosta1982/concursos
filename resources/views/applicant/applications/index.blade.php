@@ -51,6 +51,7 @@
                                         </th>
 
                                         <th is='sortable' :column="'id'">{{ trans('admin.application.columns.id') }}</th>-->
+                                        <th is='sortable' :column="'government_id'">{{ trans('admin.application.columns.government_id') }}</th>
                                         <th is='sortable' :column="'code'">{{ trans('admin.application.columns.code') }}</th>
                                         <th is='sortable' :column="'call_id'">{{ trans('admin.application.columns.call_id') }}</th>
                                         <th is='sortable' :column="'call_id'">{{ trans('admin.application.columns.position') }}</th>
@@ -80,7 +81,8 @@
                                         </td>
 
                                     <td>@{{ item.id }}</td>-->
-                                        <td>@{{ item.resume.government_id }}</td>
+                                    <td>@{{ item.resume.government_id }}</td>
+                                        <td>@{{ item.code }}</td>
                                         <td>@{{ item.call.description }}</td>
                                         <td>@{{ item.call.position.name }}</td>
                                         <td>En proceso</td>

@@ -42,8 +42,8 @@
         </div>
     </div>
 </div>
-<!--<a href="{{ url('calls/'.$call->id.'/application/'.$resume->id.'/transitionsave') }}" class="btn btn-block btn-square btn-lg text-white bg-primary"><i class="fa fa-paper-plane">
-    </i> Enviar</a>-->
+<a href="{{ url('calls/'.$call->id.'/application/'.$resume->id.'/transitionsave') }}" class="btn btn-block btn-square btn-lg text-white bg-primary"><i class="fa fa-paper-plane">
+    </i> Enviar</a>
 
 
     <div class="card">
@@ -57,11 +57,11 @@
         </div>
         @csrf
         <div class="card-body">
-            <!--<div class="alert alert-success">
+            <div class="alert alert-success">
             <ul>
-                <li>Solo es necesario subir fotos de las cédulas y en el caso del documento de la tenencia subir foto de la portada del mismo.</li>
+                <li>Adjunte constancia de verificación de legajo.</li>
             </ul>
-        </div>-->
+        </div>
             @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
@@ -72,18 +72,18 @@
             </div>
         @endif
 
-            {{--<div class="form-group col-sm-12" :class="{'has-danger': errors.has('address')}">
+            <div class="form-group col-sm-12" :class="{'has-danger': errors.has('address')}">
                 <label for="document" >{{ trans('admin.applicant-document.columns.file') }}</label>
                 <div>
                     <input type="file" name="file" class="form-control-file" id="chooseFile">
                 </div>
-            </div>--}}
-            <div class="form-group col-sm-12">
+            </div>
+            {{-- <div class="form-group col-sm-12">
                 <button type="submit" class="btn btn-block btn-square btn-lg text-white bg-primary" >
                     <i class="fa fa-paper-plane"></i>
                     Enviar
                 </button>
-            </div>
+            </div> --}}
 
         </div>
         </form>
