@@ -48,6 +48,11 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $llamados = Call::where('id', '<>', 0)
+                        ->select('id')
+                        ->first();
+        $id=$llamados->id;
+
         $fecha=Carbon::now();
         $hoy = $fecha->toJSON();
         $data = AdminListing::create(Call::class)->processRequestAndGet(
@@ -58,7 +63,13 @@ class HomeController extends Controller
             ['id', 'description', 'call_type_id', 'position_id', 'company_id', 'start', 'end'],
 
             // set columns to searchIn
-            ['id', 'description']
+            ['id', 'description'],
+
+            function ($query) use ($id) {
+                $query
+                   //  ->where('helps.id', '=', $id);
+                  ->orderBy('id', 'DESC');
+            }
         );
 
         if ($request->ajax()) {
@@ -76,6 +87,11 @@ class HomeController extends Controller
 
     public function homeCalls(Request $request)
     {
+        $llamados = Call::where('id', '<>', 0)
+                        ->select('id')
+                        ->first();
+        $id=$llamados->id;
+
         $fecha=Carbon::now();
         $hoy = $fecha->toJSON();
 
@@ -87,7 +103,13 @@ class HomeController extends Controller
             ['id', 'description', 'call_type_id', 'position_id', 'company_id', 'start', 'end'],
 
             // set columns to searchIn
-            ['id', 'description']
+            ['id', 'description'],
+
+            function ($query) use ($id) {
+                $query
+                   //  ->where('helps.id', '=', $id);
+                  ->orderBy('id', 'DESC');
+            }
         );
 
         if ($request->ajax()) {
