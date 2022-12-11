@@ -3,9 +3,11 @@
 @section('title', trans('admin.applicant.actions.trakings'))
 
 @section('body')
+<body onLoad="setTimeout('self.location.reload()', 60000)"></body>
 
 <call-listing
         :data="{{ $data->toJson() }}"
+        :hoy="'{{ $hoy }}'"
         :url="'{{ url('calls') }}'"
         status="{{ session('status') }}"
         inline-template>
@@ -72,10 +74,9 @@
                                                 <div class="col-auto">
                                                     <a class="btn btn-sm btn-spinner btn-info" :href="item.is_admin + '/show'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-search"></i></a>
                                                 </div>
-                                               <div class="col-auto">
+                                                <div class="col-auto" v-if="item.start <= '{{$hoy}}' && item.end >= '{{$hoy}}'">
                                                     <a class="btn btn-sm btn-spinner btn-success" :href="item.is_admin + '/application'" title="{{ trans('brackets/admin-ui::admin.btn.show') }}" role="button"><i class="fa fa-check-square"></i></a>
                                                 </div>
-
 
 
                                             </div>

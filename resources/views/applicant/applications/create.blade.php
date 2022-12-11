@@ -57,11 +57,11 @@
         </div>
         @csrf
         <div class="card-body">
-            <!--<div class="alert alert-success">
+            <div class="alert alert-success">
             <ul>
-                <li>Solo es necesario subir fotos de las cédulas y en el caso del documento de la tenencia subir foto de la portada del mismo.</li>
+                <li>Adjunte constancia de verificación de legajo.</li>
             </ul>
-        </div>-->
+        </div>
             @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>

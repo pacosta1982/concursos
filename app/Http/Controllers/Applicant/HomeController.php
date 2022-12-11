@@ -21,6 +21,7 @@ use App\Http\Requests\StoreApplicantUserConyuge;
 use App\Http\Requests\UpdateApplicantUserConyuge;
 use App\Http\Requests\UpdateApplicantUser;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 use App\Mail\DemoEmail;
 use Illuminate\Support\Facades\Mail;
@@ -47,7 +48,13 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $llamados = Call::where('id', '<>', 0)
+                        ->select('id')
+                        ->first();
+        $id=$llamados->id;
 
+        $fecha=Carbon::now();
+        $hoy = $fecha->toJSON();
         $data = AdminListing::create(Call::class)->processRequestAndGet(
             // pass the request with params
             $request,
@@ -56,7 +63,13 @@ class HomeController extends Controller
             ['id', 'description', 'call_type_id', 'position_id', 'company_id', 'start', 'end'],
 
             // set columns to searchIn
-            ['id', 'description']
+            ['id', 'description'],
+
+            function ($query) use ($id) {
+                $query
+                   //  ->where('helps.id', '=', $id);
+                  ->orderBy('id', 'DESC');
+            }
         );
 
         if ($request->ajax()) {
@@ -69,11 +82,18 @@ class HomeController extends Controller
         }
         $user = Auth::user();
 
-        return view('applicant.home', compact('user', 'data'));
+        return view('applicant.home', compact('user', 'data', 'hoy'));
     }
 
     public function homeCalls(Request $request)
     {
+        $llamados = Call::where('id', '<>', 0)
+                        ->select('id')
+                        ->first();
+        $id=$llamados->id;
+
+        $fecha=Carbon::now();
+        $hoy = $fecha->toJSON();
 
         $data = AdminListing::create(Call::class)->processRequestAndGet(
             // pass the request with params
@@ -83,7 +103,13 @@ class HomeController extends Controller
             ['id', 'description', 'call_type_id', 'position_id', 'company_id', 'start', 'end'],
 
             // set columns to searchIn
-            ['id', 'description']
+            ['id', 'description'],
+
+            function ($query) use ($id) {
+                $query
+                   //  ->where('helps.id', '=', $id);
+                  ->orderBy('id', 'DESC');
+            }
         );
 
         if ($request->ajax()) {
@@ -96,7 +122,7 @@ class HomeController extends Controller
         }
         $user = Auth::user();
 
-        return view('applicant.calls.index', compact('user', 'data'));
+        return view('applicant.calls.index', compact('user', 'data', 'hoy'));
     }
 
     public function getDocuments(Request $request)
